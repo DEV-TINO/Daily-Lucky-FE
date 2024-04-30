@@ -12,6 +12,10 @@
 			</div>
 			<div class="month-leftright calendarMonth">></div>
 		</div>
+		<div class="calendar-challenge">
+			<img class="calendar-challenge-image" src="/public/images/lucky-sad.png"></img>
+			<div class="calendar-challenge-contents">아직 아무 챌린지도 없어요...</div>
+		</div>
 		<div class="calendar-footer-menu">
 			<img class="footer-menu-image" src="/public/images/write.png">
 			<img class="footer-menu-image" src="/public/images/calendar.png">
@@ -56,6 +60,27 @@ export default {
 	color: #958565;
 	font-size: 10px;
 	/* border: 1px solid black; */
+}
+.calendar-challenge{
+	position: absolute;
+	bottom: 94px;
+	width: 100vh;
+	height: 141px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(249, 233, 197, 0.35);
+	border: 2px solid #DDCBAC;
+}
+.calendar-challenge-image{
+	width: 87px;
+	height: 72px;
+	margin-right:28px; 
+}
+.calendar-challenge-contents{
+	font-size: 24px;
+	color: #958565;
 }
 .calendar-footer-menu{
 	width: 100%;
