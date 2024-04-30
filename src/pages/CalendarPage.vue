@@ -71,7 +71,7 @@ export default {
 	justify-content: center;
 	align-items: center;
 	background-color: rgba(249, 233, 197, 0.35);
-	border: 2px solid #DDCBAC;
+	border-bottom: 2px solid #DDCBAC;
 }
 .calendar-challenge-image{
 	width: 87px;
@@ -132,6 +132,6 @@ export default {
 }
 .month-now-year{
 	font-size:10px;
-	margin-bottom: 10%;
+	margin-bottom: 10px;
 }
 </style>
