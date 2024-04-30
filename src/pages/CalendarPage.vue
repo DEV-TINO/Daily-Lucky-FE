@@ -4,6 +4,14 @@
       <img class="calendar-logo-image" src="/public/images/lucky-lucky.png"></img>
 			<div class="calendar-logo-title">Daily Lucky</div>
     </div>
+		<div class="calendar-month">
+			<div class="month-leftright calendarMonth"><</div>
+			<div class="month-now calendarMonth">
+				<div class="month-now-month">April</div>
+				<div class="month-now-year">2024</div>
+			</div>
+			<div class="month-leftright calendarMonth">></div>
+		</div>
 		<div class="calendar-footer-menu">
 			<img class="footer-menu-image" src="/public/images/write.png">
 			<img class="footer-menu-image" src="/public/images/calendar.png">
@@ -46,6 +54,7 @@ export default {
 }
 .calendar-logo-title{
 	color: #958565;
+	font-size: 10px;
 	/* border: 1px solid black; */
 }
 .calendar-footer-menu{
@@ -68,5 +77,36 @@ export default {
 }
 .footer-menu-image:last-child{
 	margin-right: 0;
+}
+.calendar-month{
+	width:100vh;
+	height: 72px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	color:#958565;
+	/* border: 1px solid black; */
+}
+.calendarMonth{
+	margin-right: 115px;
+	font-size: 32px;
+}
+.calendarMonth:last-child{
+	margin-right: 0px;
+}
+.month-now{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.month-now-month{
+	font-size: 48px;
+	margin-bottom: 5px;
+}
+.month-now-year{
+	font-size:10px;
+	margin-bottom: 10%;
 }
 </style>
