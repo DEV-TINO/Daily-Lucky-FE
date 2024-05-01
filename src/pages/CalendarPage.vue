@@ -22,6 +22,11 @@
 				<div class="calendar-day">FRI</div>
 				<div class="calendar-day">SAT</div>
 			</div>
+			<div class="calendar-calendar-date">
+				<div v-for="(week,index) in weeks":key="index" class="calendar-date-week"> 
+					<div class="calender-date-week-date">1 2 3 4 5 6 7</div>
+				</div>
+			</div>
 		</div>
 		<div class="calendar-challenge">
 			<img class="calendar-challenge-image" src="/public/images/lucky-sad.png"></img>
@@ -40,7 +45,8 @@ export default {
 	name: "CalendarPage",
 	data(){
 		return{
-			date:1
+			date:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+			weeks:[1,2,3,4,5,6]
 		}
 	}
 };
@@ -140,6 +146,22 @@ export default {
 	margin-right: 0px;
 	color:#737FE9;
 	border-bottom: 2px solid #737FE9;
+}
+.calendar-calendar-date{
+	width: 100%;
+	height: 375px;
+	border:1px solid red;
+}
+.calendar-date-week{
+	width: 100%;
+	height: 60.5px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	font-size:14px;
+	color:#958565;
+	border: 1px solid;
 }
 .calendar-challenge{
 	position: absolute;
