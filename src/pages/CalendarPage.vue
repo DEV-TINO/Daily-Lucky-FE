@@ -22,9 +22,13 @@
 				<div class="calendar-day">FRI</div>
 				<div class="calendar-day">SAT</div>
 			</div>
-			<div class="calendar-calendar-date">
-				<div v-for="(week,index) in weeks":key="index" class="calendar-date-week"> 
-					<div class="calender-date-week-date">1 2 3 4 5 6 7</div>
+			<div class="calendar-calendar-date" style="gap: 8px; display: flex; flex-direction: column;">
+				<div v-for="(week, index) in 5":key="index" class="calendar-date-week"> 
+					<div v-for="d, d_index in 7" :key="d" style="width: 28px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between;">
+						<div style="height: 16px; width: 100%; text-align: center;">1</div>
+						<div style="height: 100%; width: 100%; background-image: url('/images/lucky-lucky.png'); background-position: center; background-size: contain; transform: scale(1.5);  background-repeat: no-repeat;"></div>
+						<div style="height: 2px; width: 100%; border-radius: 5px;" class="bg-select"></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -150,18 +154,17 @@ export default {
 .calendar-calendar-date{
 	width: 100%;
 	height: 375px;
-	border:1px solid red;
+	/* border:1px solid red; */
+	/* TODO: Remove bg after */
 }
 .calendar-date-week{
 	width: 100%;
-	height: 60.5px;
+	height: 56px;
 	display: flex;
 	flex-direction: row;
+	gap: 18px;
 	justify-content: center;
-	align-items: center;
 	font-size:14px;
-	color:#958565;
-	border: 1px solid;
 }
 .calendar-challenge{
 	position: absolute;
