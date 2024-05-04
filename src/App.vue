@@ -1,18 +1,21 @@
 <template>
   <div class="screen">
     <SplashPage v-if="currentPage == 1" @click="currentPage = 2" />
-    <CalendarPage v-if="currentPage == 2" />
+    <CalendarPage v-if="currentPage == 2" @click="currentPage = 3" />
+    <WritePage v-if="currentPage == 3" />
   </div>
 </template>
 
 <script>
 import SplashPage from "./pages/SplashPage.vue";
 import CalendarPage from "./pages/CalendarPage.vue";
+import WritePage from "./pages/WritePage.vue";
 
 export default {
   components: {
     SplashPage,
     CalendarPage,
+    WritePage,
   },
   data() {
     return {
