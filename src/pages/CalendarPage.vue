@@ -1,209 +1,252 @@
 <template>
   <div class="calendar-container">
     <div class="calendar-logo">
-      <img class="calendar-logo-image" src="/public/images/lucky-lucky.png"></img>
-			<div class="calendar-logo-title">Daily Lucky</div>
+      <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
+      <div class="title">Daily Lucky</div>
     </div>
-		<div class="calendar-month">
-			<div class="month-leftright calendar-months"><</div>
-			<div class="month-now calendar-months">
-				<div class="month-now-month">April</div>
-				<div class="month-now-year">2024</div>
-			</div>
-			<div class="month-leftright calendar-months">></div>
-		</div>
-		<div class="calendar-calendar">
-			<div class="calendar-calendar-day">
-				<div class="calendar-day">SUN</div>
-				<div class="calendar-day">MON</div>
-				<div class="calendar-day">TUE</div>
-				<div class="calendar-day">WED</div>
-				<div class="calendar-day">THU</div>
-				<div class="calendar-day">FRI</div>
-				<div class="calendar-day">SAT</div>
-			</div>
-			<div class="calendar-calendar-date">
-				<div v-for="(week,index) in weeks":key="index" class="calendar-date-week"> 
-					<div class="calender-date-week-date">1 2 3 4 5 6 7</div>
-				</div>
-			</div>
-		</div>
-		<div class="calendar-challenge">
-			<img class="calendar-challenge-image" src="/public/images/lucky-sad.png"></img>
-			<div class="calendar-challenge-contents">아직 아무 챌린지도 없어요...</div>
-		</div>
-		<div class="calendar-footer-menu">
-			<img class="footer-menu-image" src="/public/images/write.png">
-			<img class="footer-menu-image" src="/public/images/calendar.png">
-			<img class="footer-menu-image" src="/public/images/challenge.png">
-		</div>
+    <div class="calendar-month">
+      <div class="month-before"><</div>
+      <div class="month-now">
+        <div class="month">April</div>
+        <div class="year">2024</div>
+      </div>
+      <div class="month-after">></div>
+    </div>
+    <div class="calendar">
+      <div class="days">
+        <div class="calendar-day" v-for="(day, index) in days" :key="index">
+          {{ day }}
+        </div>
+      </div>
+      <div class="weeks" v-for="(week, index) in 5" :key="index">
+        <div class="dates" v-for="(date, index) in 7" :key="index">
+          <!-- <div class="date-base">
+            <div class="date-base-sun" v-if="date == 1">
+              {{ (week - 1) * 7 + date }}
+            </div>
+            <div class="date-base-sat" v-if="date == 7">
+              {{ (week - 1) * 7 + date }}
+            </div>
+            <div class="date-base-today" v-if="date != 1 && date != 7">
+              {{ (week - 1) * 7 + date }}
+            </div>
+          </div> -->
+          <div class="date-today-radius">
+            <div class="radius-today">24</div>
+          </div>
+          <div class="date-emoji"></div>
+          <div class="date-today-bar"></div>
+        </div>
+      </div>
+    </div>
+    <div class="calendar-challenge sub-color">
+      <img
+        class="calendar-challenge-image"
+        src="/public/images/lucky-sad.png"
+      />
+      <div class="calendar-challenge-contents">
+        아직 아무 챌린지도 없어요...
+      </div>
+    </div>
+    <div class="calendar-footer-menu">
+      <img class="footer-menu-image" src="/public/images/write.png" />
+      <img class="footer-menu-image" src="/public/images/calendar.png" />
+      <img class="footer-menu-image" src="/public/images/challenge.png" />
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-	name: "CalendarPage",
-	data(){
-		return{
-			date:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
-			weeks:[1,2,3,4,5,6]
-			
-		}
-	}
+  name: "CalendarPage",
+  data() {
+    return {
+      days: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
+    };
+  },
 };
 </script>
 
 <style scoped>
-.calendar-container{
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	/* border: 1px solid black; */
+.calendar-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.calendar-logo{
-	margin-top: 51px;
-	height: 68px;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	/* border: 1px solid black; */
+.calendar-logo {
+  margin-top: 51px;
+  height: 68px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .logo-emoji {
+    width: 55px;
+    height: 54px;
+  }
+  .title {
+    color: #958565;
+    font-size: 10px;
+  }
 }
-.calendar-logo-image{
-	width: 55px;
-	height: 54px;
-	/* border: 1px solid black; */
+.calendar-month {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  color: #958565;
+  font-size: 32px;
+  .month-before, .month-after{
+    width: 50px;
+    display: flex;
+    justify-content: center;
+  }
+  .month-now {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .month {
+      font-size: 48px;
+      margin-bottom: 5px;
+    }
+    .year {
+      font-size: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}
 
+.days {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 310px;
+  height: 46px;
+  gap: 15px;
 }
-.calendar-logo-title{
-	color: #958565;
-	font-size: 10px;
-	/* border: 1px solid black; */
+.calendar-day {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  color: #958565;
+  font-size: 18px;
+  border-bottom: 2px solid #958565;
 }
-.calendar-month{
-	width:100%;
-	height: 72px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	color:#958565;
-	/* border: 1px solid black; */
+.calendar-day:first-child {
+  color: #dd6262;
+  border-bottom: 2px solid #dd6262;
 }
-.calendar-months{
-	margin-right: 115px;
-	font-size: 32px;
+.calendar-day:last-child {
+  color: #737fe9;
+  border-bottom: 2px solid #737fe9;
 }
-.calendar-months:last-child{
-	margin-right: 0px;
+.weeks {
+  width: 100%;
+  height: 60.5px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  padding-bottom: 8px;
+  align-items: center;
+  font-size: 14px;
+  color: #4c3a15;
 }
-.month-now{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+.dates {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .date-base {
+    width: 100%;
+    height: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .date-base-sun {
+      color: #dd6262;
+    }
+    .date-base-sat {
+      color: #737fe9;
+    }
+  }
+  .date-emoji {
+    background-image: url("/public/images/lucky-happy.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .date-today-radius {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-radius: 50%;
+    color: #ffffff;
+    background-color: rgba(149, 133, 101, 0.45);
+    .radius-today {
+      margin-bottom: 2px;
+      margin-left: 1px;
+    }
+  }
+  .date-today-bar {
+    width: 35px;
+    height: 4px;
+    border-radius: 5px;
+    background-color: #cbc3ae;
+  }
 }
-.month-now-month{
-	font-size: 48px;
-	margin-bottom: 5px;
+.calendar-challenge {
+  position: absolute;
+  bottom: 94px;
+  width: 100%;
+  height: 141px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(249, 233, 197, 0.35);
+  border-bottom: 2px solid #ddcbac;
+  .calendar-challenge-image {
+    width: 87px;
+    height: 72px;
+    margin-right: 28px;
+  }
+  .calendar-challenge-contents {
+    font-size: 24px;
+    color: #958565;
+  }
 }
-.month-now-year{
-	font-size:10px;
-	margin-bottom: 10px;
-}
-.calendar-calendar{
-	width:100%;
-	height:415px;
-	/* border:1px solid red; */
-}
-.calendar-calendar-day{
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	width:100%;
-	height: 46px;
-	/* border:1px solid blue; */
-}
-.calendar-day{
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	margin-right: 18px;
-	width:28px;
-	height:27px;
-	color: #958565;
-	font-size: 18px;
-	border-bottom:2px solid #958565;
-	/* border:1px solid green; */
-}
-.calendar-day:first-child{
-	color: #DD6262;
-	border-bottom: 2px solid #DD6262;
-}
-.calendar-day:last-child{
-	margin-right: 0px;
-	color:#737FE9;
-	border-bottom: 2px solid #737FE9;
-}
-.calendar-calendar-date{
-	width: 100%;
-	height: 375px;
-	border:1px solid red;
-}
-.calendar-date-week{
-	width: 100%;
-	height: 60.5px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	font-size:14px;
-	color:#958565;
-	border: 1px solid;
-}
-.calendar-challenge{
-	position: absolute;
-	bottom: 94px;
-	width: 100%;
-	height: 141px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	background-color: rgba(249, 233, 197, 0.35);
-	border-bottom: 2px solid #DDCBAC;
-}
-.calendar-challenge-image{
-	width: 87px;
-	height: 72px;
-	margin-right:28px; 
-}
-.calendar-challenge-contents{
-	font-size: 24px;
-	color: #958565;
-}
-.calendar-footer-menu{
-	width: 100%;
-	height: 64px;
-	left: 0;
-	right: 0;
-	position: absolute;
-	bottom:17px;
-	display:flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	/* border: 1px solid black; */
-}
-.footer-menu-image{
-	width: 40px;
-	height: 55px;
-	margin-right:60px;
-}
-.footer-menu-image:last-child{
-	margin-right: 0;
+.calendar-footer-menu {
+  width: 100%;
+  height: 64px;
+  left: 0;
+  right: 0;
+  position: absolute;
+  bottom: 17px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  .footer-menu-image {
+    width: 40px;
+    height: 55px;
+  }
 }
 </style>
