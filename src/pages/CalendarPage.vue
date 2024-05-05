@@ -83,7 +83,7 @@ export default {
   align-items: center;
   .logo-emoji {
     width: 55px;
-    height: 54px;
+    height: 48px;
   }
   .title {
     color: #958565;
