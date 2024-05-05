@@ -98,7 +98,7 @@ export default {
     align-items: center;
     justify-content: center;
     .emoji {
-      width: 95px;
+      width: 90px;
       height: 84px;
       display: flex;
       flex-direction: column;
@@ -106,22 +106,24 @@ export default {
       justify-content: center;
 
       .lucky {
-        margin-top: 11px;
-        width: 68px;
-        height: 60px;
+        margin-top:30px;
+        width: 59px;
+        height: 55px;
       }
       .happy {
-        width: 85px;
-        height: 68px;
+        margin-top:20px;
+        width: 75px;
+        height: 62px;
       }
       .sad {
-        width: 76px;
-        height: 65px;
+        margin-top:22px;
+        width: 68px;
+        height: 56px;
       }
       .angry {
-        margin-bottom: 11px;
-        width: 83px;
-        height: 80px;
+        margin-top: 8px;
+        width: 75px;
+        height: 70px;
       }
     }
   }
@@ -133,7 +135,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 75px;
+    gap: 72px;
   }
 }
 .writing {
