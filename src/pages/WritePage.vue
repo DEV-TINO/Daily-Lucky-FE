@@ -224,7 +224,7 @@
     .upload-button {
       width: 80%;
       height: 41px;
-      margin-top: 20px;
+      margin-top: 18px;
       color: #988461;
       background-color: #f9e0c5;
       border-radius: 5px;
