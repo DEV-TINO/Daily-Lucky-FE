@@ -30,6 +30,13 @@
         <div class="color-red">Angry</div>
       </div>
     </div>
+    <div class="writing">
+      <div class="writing-date">
+        <div class="month-year main-color">MAY 2024</div>
+        <div class="date-day main-color">24 Friday</div>
+      </div>
+      <textarea class="lined-textarea" placeholder="Write today's diary"></textarea>
+    </div>
     <div class="footer-menu">
       <img class="footer-menu-image" src="/public/images/write.png" />
       <img class="footer-menu-image" src="/public/images/calendar.png" />
@@ -69,13 +76,14 @@ export default {
 }
 .today-moods {
   width: 100%;
-  height: 155px;
+  height: 170px;
+  /* background-color: #dfebf8; */
   .moods-text {
     width: 100%;
     height: 60px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     padding-left: 29px;
     font-size: 24px;
     .mood {
@@ -98,7 +106,7 @@ export default {
       justify-content: center;
 
       .lucky {
-        margin-top:11px;
+        margin-top: 11px;
         width: 68px;
         height: 60px;
       }
@@ -111,21 +119,69 @@ export default {
         height: 65px;
       }
       .angry {
-        margin-bottom:11px;
+        margin-bottom: 11px;
         width: 83px;
         height: 80px;
       }
     }
   }
   .moods-emoji-text {
+    /* background-color: #f0d5d4; */
+    width: 100%;
+    height: 15px;
     font-size: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap:75px;
+    gap: 75px;
   }
 }
-
+.writing {
+  width: 100%;
+  height: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: #e6f8df; */
+  .writing-date{
+    width: 100%;
+    height: 50px;
+    padding-top: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .month-year{
+      padding-left: 35px;
+      font-size: 24px;
+    }
+    .date-day{
+      padding-right: 35px;
+      font-size: 16px;
+    }
+  }
+  .lined-textarea {
+    width: 80%;
+    height: 250px;
+    background-image: url("/images/lines.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    font-size: 18px;
+    text-align: start;
+    line-height: 31px;
+    padding: 0;
+    font-family: "custom-font";
+    background-color: transparent;
+    border: none;
+    overflow: clip;
+  }
+  .lined-textarea:focus {
+    outline: none;
+  }
+  .lined-textarea::placeholder{
+    color:#CCC6BA;
+    font-size: 14px;
+  }
+}
 .footer-menu {
   width: 100%;
   height: 64px;
