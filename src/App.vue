@@ -1,9 +1,11 @@
 <template>
   <div class="screen">
+    <!-- <NewWritePage v-if="currentPage == 0"></NewWritePage> -->
     <SplashPage v-if="currentPage == 1" @click="currentPage = 2" />
     <CalendarPage v-if="currentPage == 2" @click="currentPage = 3" />
     <WritePage v-if="currentPage == 3" @click="currentPage = 4" />
-    <ChallengePage v-if="currentPage == 4" />
+    <ChallengePage v-if="currentPage == 4" @click="currentPage = 5" />
+    <CreateChallengePage v-if="currentPage == 5" />
   </div>
 </template>
 
@@ -12,6 +14,8 @@
   import CalendarPage from "./pages/CalendarPage.vue";
   import WritePage from "./pages/WritePage.vue";
   import ChallengePage from "./pages/ChallengePage.vue";
+  import NewWritePage from "./pages/NewWritePage.vue";
+  import CreateChallengePage from "./pages/CreateChallengePage.vue";
 
   export default {
     components: {
@@ -19,6 +23,8 @@
       CalendarPage,
       WritePage,
       ChallengePage,
+      NewWritePage,
+      CreateChallengePage,
     },
     data() {
       return {
