@@ -11,30 +11,30 @@
     <div class="create-challenge-box">
       <!-- Create Challenge -->
       <div class="create">
-        <div class="create-title">create challenge!</div>
+        <div class="create-title main-color">Create Challenge!</div>
         <div class="create-contents">
-          <div class="challenge-title">Title</div>
-          <input
-            class="challenge-title-input"
-            placeholder="Write challenge title"
-          />
-          <div class="challenge-contents">Contents</div>
+          <div class="challenge-title main-color">Title</div>
           <textarea
-            class="challenge-contents-textarea"
+            class="challenge-title-textarea main-color"
+            placeholder="Write challenge title"
+          ></textarea>
+          <div class="challenge-contents main-color">Contents</div>
+          <textarea
+            class="challenge-contents-textarea main-color"
             placeholder="Write challenge contents"
           ></textarea>
         </div>
       </div>
       <!-- Select Date -->
       <div class="select-date">
-        <div class="select-date-text">Due to</div>
+        <div class="select-date-text main-color">Due to</div>
         <div class="start-date">
           <div class="start-text">Start from..</div>
-          <div class="start-select">시작날짜선택</div>
+          <div class="start-select main-color">시작날짜선택</div>
         </div>
         <div class="end-date">
           <div class="end-text">End to..</div>
-          <div class="end-select">끝나는날짜선택</div>
+          <div class="end-select main-color">끝나는날짜선택</div>
         </div>
       </div>
       <!-- Save Button -->
@@ -79,7 +79,6 @@
     padding-top: 45px;
     justify-content: center;
     align-items: center;
-    background-color: azure;
     .logo {
       display: flex;
       flex-direction: column;
@@ -98,20 +97,105 @@
   .create-challenge-box {
     height: 664px;
     width: 100%;
-    border: 1px solid #988461;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     .create {
-      width: 100%;
       height: 293px;
-      background-color: #f7f7f7;
+      width: 100%;
+      margin-top: 29px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .create-title {
+        height: 30px;
+        width: 333px;
+        display: flex;
+        justify-content: flex-start;
+        font-size: 24px;
+      }
+      .create-contents {
+        width: 80%;
+        margin-top: 17px;
+        font-size: 24px;
+        .challenge-title-textarea {
+          width: 100%;
+          height: 37px;
+          margin-bottom: 27px;
+          box-sizing: border-box;
+          background-image: url("/public/images/line.png");
+          background-position: bottom;
+          background-size: contain;
+          background-repeat: no-repeat;
+          font-size: 14px;
+          text-align: start;
+          line-height: 35px;
+          font-family: "custom-font";
+          background-color: transparent;
+          border: none;
+          overflow: clip;
+          resize: none;
+        }
+        .challenge-title-textarea::placeholder {
+          color: #ccc6ba;
+        }
+        .challenge-title-textarea:focus {
+          outline: none;
+        }
+        .challenge-contents-textarea {
+          width: 100%;
+          height: 80px;
+          box-sizing: border-box;
+          background-image: url("/public/images/line2.png");
+          background-position: bottom;
+          background-size: contain;
+          background-repeat: no-repeat;
+          font-size: 14px;
+          text-align: start;
+          line-height: 40px;
+          font-family: "custom-font";
+          background-color: transparent;
+          border: none;
+          overflow: clip;
+          resize: none;
+        }
+        .challenge-contents-textarea::placeholder {
+          color: #ccc6ba;
+        }
+        .challenge-contents-textarea:focus {
+          outline: none;
+        }
+      }
     }
     .select-date {
-      width: 100%;
+      width: 80%;
       height: 293px;
-      background-color: #e5b4b4;
+      .select-date-text {
+        font-size: 24px;
+      }
+      .start-date {
+        .start-text {
+          font-size: 20px;
+          margin: 18px 0px 21px 13px;
+          color: #ff8e8c;
+        }
+        .start-select {
+          font-size: 24px;
+          text-align: center;
+        }
+      }
+      .end-date {
+        .end-text {
+          font-size: 20px;
+          margin: 41px 0px 21px 13px;
+          color: #ff8e8c;
+        }
+        .end-select {
+          font-size: 24px;
+          text-align: center;
+        }
+      }
     }
     .save-btn {
       width: 331px;
@@ -121,7 +205,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 19px;
+      margin-bottom: 19px;
       font-size: 24px;
       color: #988461;
     }
