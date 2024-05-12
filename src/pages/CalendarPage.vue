@@ -1,44 +1,69 @@
 <template>
   <div class="calendar-container">
+    <!-- Top Nav -->
     <div class="calendar-logo">
       <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
       <div class="title">Daily Lucky</div>
     </div>
+
+    <!-- Calendar Top -->
     <div class="calendar-month">
-      <div class="month-before"><</div>
+      <div class="month-before" @click="changeMonth(-1)"><</div>
       <div class="month-now">
-        <div class="month">April</div>
-        <div class="year">2024</div>
+        <div class="month">{{ months[currentMonth] }}</div>
+        <div class="year">{{ currentYear }}</div>
       </div>
-      <div class="month-after">></div>
+      <div class="month-after" @click="changeMonth(1)">></div>
     </div>
+
+    <!-- Calendar date -->
     <div class="calendar">
       <div class="days">
         <div class="calendar-day" v-for="(day, index) in days" :key="index">
           {{ day }}
         </div>
       </div>
-      <div class="weeks" v-for="(week, index) in 5" :key="index">
+      <div class="weeks" v-for="(week, index) in 6" :key="index">
         <div class="dates" v-for="(date, index) in 7" :key="index">
           <!-- <div class="date-base">
             <div class="date-base-sun" v-if="date == 1">
               {{ (week - 1) * 7 + date }}
             </div>
-            <div class="date-base-sat" v-if="date == 7">
+            <div class="date-base-sat" v-if="dates == 7">
               {{ (week - 1) * 7 + date }}
             </div>
             <div class="date-base-today" v-if="date != 1 && date != 7">
               {{ (week - 1) * 7 + date }}
             </div>
           </div> -->
+
+          <!-- Selected date -->
           <div class="date-today-radius">
             <div class="radius-today">24</div>
           </div>
           <div class="date-emoji"></div>
           <div class="date-today-bar"></div>
+
+          <!-- <div class="weeks">
+            <div v-for="(week, index) in calendarData" :key="index">
+              <div class="date-base" v-for="(date, index) in week" :key="index">
+                <div class="date-today-radius" v-if="isToday(date)">
+                  <div class="radius-today">{{ currentDate }}</div>
+                </div>
+                <div v-else>{{ currentDate }}</div>
+                <div class="date-emoji"></div>
+                <div class="date-today-bar" v-if="isToday(date)"></div>
+              </div>
+            </div>
+          </div> -->
         </div>
       </div>
     </div>
+
+    <!-- Fill Space -->
+    <div class="fill-space"></div>
+
+    <!-- Selected Challenge -->
     <div class="calendar-challenge sub-color">
       <img
         class="calendar-challenge-image"
@@ -48,7 +73,9 @@
         아직 아무 챌린지도 없어요...
       </div>
     </div>
-    <div class="calendar-footer-menu">
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
       <div class="menu-write">
         <img class="write-img" src="/public/images/write.png" />
         <div class="write-text">write</div>
@@ -71,7 +98,83 @@
     data() {
       return {
         days: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
+        months: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ],
+        currentYear: new Date().getFullYear(),
+        currentMonth: new Date().getMonth(),
+        currentDate: new Date().getDate(),
+        daysArray: [],
+        date: 1,
+        calendarData: [],
       };
+    },
+
+    mounted() {
+      this.calendarData = this.generateCalendar();
+    },
+
+    methods: {
+      changeMonth(change) {
+        this.currentMonth += change;
+        if (this.currentMonth < 0) {
+          this.currentMonth = 11;
+          this.currentYear -= 1;
+        } else if (this.currentMonth > 11) {
+          this.currentMonth = 0;
+          this.currentYear += 1;
+        }
+        this.calendarData = this.generateCalendar();
+      },
+      generateCalendar() {
+        this.date = 1;
+        this.daysArray = [];
+        const startDay = new Date(
+          this.currentYear,
+          this.currentMonth,
+          1
+        ).getDay();
+        const daysInMonth = new Date(
+          this.currentYear,
+          this.currentMonth + 1,
+          0
+        ).getDate();
+        for (let i = 0; i < 6; i++) {
+          this.daysArray.push([]);
+          for (let j = 0; j < 7; j++) {
+            if (this.date > daysInMonth) {
+              break;
+            } else {
+              this.daysArray[i][j] = new Date(
+                this.currentYear,
+                this.currentMonth,
+                this.date
+              );
+              this.date++;
+            }
+          }
+        }
+        return this.daysArray;
+        console.log(this.daysArray);
+      },
+      isToday(date) {
+        return (
+          date.getFullYear() === new Date().getFullYear() &&
+          date.getMonth() === new Date().getMonth() &&
+          date.getDate() === new Date().getDate()
+        );
+      },
     },
   };
 </script>
@@ -222,9 +325,10 @@
       background-color: #cbc3ae;
     }
   }
+  .fill-space {
+    flex-grow: 1;
+  }
   .calendar-challenge {
-    position: absolute;
-    bottom: 94px;
     width: 100%;
     height: 141px;
     display: flex;
@@ -242,51 +346,18 @@
       color: #958565;
     }
   }
-  .calendar-footer-menu {
+  .bottom-nav {
     width: 100%;
     height: 64px;
-    left: 0;
-    right: 0;
-    position: absolute;
-    bottom: 17px;
+    margin-bottom: 25px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     border-top: 1px solid #ddcbac;
     gap: 50px;
-    .menu-write {
-      width: 45px;
-      height: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      .write-img {
-        width: 37px;
-        height: 35px;
-      }
-      .write-text {
-        font-size: 10px;
-        color: #988461;
-      }
-    }
-    .menu-calendar {
-      width: 45px;
-      height: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      .calendar-img {
-        width: 32px;
-        height: 37px;
-      }
-      .calendar-text {
-        font-size: 10px;
-        color: #988461;
-      }
-    }
+    .menu-write,
+    .menu-calendar,
     .menu-challenge {
       width: 45px;
       height: 48px;
@@ -294,14 +365,19 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      .challenge-img {
-        width: 34px;
-        height: 35px;
-      }
-      .challenge-text {
-        font-size: 10px;
-        color: #988461;
-      }
+      margin-top: 5px;
+    }
+    .write-img,
+    .calendar-img,
+    .challenge-img {
+      width: 37px;
+      height: 35px;
+    }
+    .write-text,
+    .calendar-text,
+    .challenge-text {
+      font-size: 10px;
+      color: #988461;
     }
   }
 </style>

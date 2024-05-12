@@ -2,7 +2,7 @@
   <div class="splash-container">
     <div class="main-color splash-title">Daily Lucky</div>
     <img class="splash-image" src="/images/lucky-lucky.png" />
-    <div class="sub-color splash-subtitle">Touch to Start</div>
+    <div class="sub-color splash-subtitle sub-color">Touch to Start</div>
   </div>
 </template>
 

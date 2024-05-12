@@ -58,6 +58,7 @@
   .sub-color {
     color: #787265;
   }
+
   .color-red {
     color: #dd6262;
   }
