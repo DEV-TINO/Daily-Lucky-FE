@@ -1,40 +1,29 @@
 <template>
   <div class="screen">
-    <!-- <NewWritePage v-if="currentPage == 0"></NewWritePage> -->
-    <SplashPage v-if="currentPage == 1" @click="currentPage = 2" />
-    <CalendarPage v-if="currentPage == 2" />
-    <WritePage v-if="currentPage == 3" />
-    <ChallengePage v-if="currentPage == 4" />
-    <CreateChallengePage v-if="currentPage == 5" />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import SplashPage from "./pages/SplashPage.vue";
-  import CalendarPage from "./pages/CalendarPage.vue";
-  import WritePage from "./pages/WritePage.vue";
-  import ChallengePage from "./pages/ChallengePage.vue";
-  import NewWritePage from "./pages/NewWritePage.vue";
-  import CreateChallengePage from "./pages/CreateChallengePage.vue";
-
   export default {
-    components: {
-      SplashPage,
-      CalendarPage,
-      WritePage,
-      ChallengePage,
-      NewWritePage,
-      CreateChallengePage,
-    },
     data() {
       return {
-        currentPage: 1, // Splash Page
+        bottomMenu: ["write", "calendar", "challenge"],
       };
+    },
+    // computed: {
+    //   showBottomNav() {
+    //     return this.$route.name !== "Splash";
+    //   },
+    // },
+    mounted() {
+      console.log(this.$route.name);
     },
   };
 </script>
 
 <style>
+  /* @import "./assets/styles/bottom-nav.css"; 공통 CSS 파일을 임포트 */
   @font-face {
     font-family: "custom-font";
     src: url("@/assets/fonts/custom-font.ttf");
@@ -49,6 +38,8 @@
   .screen {
     width: 393px;
     height: 852px;
+    display: flex;
+    flex-direction: column;
   }
 
   .main-color {
