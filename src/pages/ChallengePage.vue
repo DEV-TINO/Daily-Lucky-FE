@@ -39,26 +39,17 @@
     </div>
 
     <!-- Bottom Nav -->
-    <div class="calendar-footer-menu">
-      <div class="menu-write">
-        <img class="write-img" src="/public/images/write.png" />
-        <div class="write-text">write</div>
-      </div>
-      <div class="menu-calendar">
-        <img class="calendar-img" src="/public/images/calendar.png" />
-        <div class="calendar-text">calendar</div>
-      </div>
-      <div class="menu-challenge">
-        <img class="challenge-img" src="/public/images/challenge.png" />
-        <div class="challenge-text">challenge</div>
-      </div>
-    </div>
+    <BottomNav></BottomNav>
   </div>
 </template>
 
 <script>
+  import BottomNav from "@/components/BottomNav.vue";
   export default {
     name: "ChallengePage",
+    components: {
+      BottomNav,
+    },
   };
 </script>
 
@@ -68,7 +59,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
   }
   .top {
     width: 100%;
@@ -179,69 +169,6 @@
       align-items: center;
       font-size: 24px;
       color: #988461;
-    }
-  }
-
-  .calendar-footer-menu {
-    width: 100%;
-    height: 64px;
-    left: 0;
-    right: 0;
-    position: absolute;
-    bottom: 17px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-top: 1px solid #ddcbac;
-    gap: 50px;
-    .menu-write {
-      width: 45px;
-      height: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      .write-img {
-        width: 37px;
-        height: 35px;
-      }
-      .write-text {
-        font-size: 10px;
-        color: #988461;
-      }
-    }
-    .menu-calendar {
-      width: 45px;
-      height: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      .calendar-img {
-        width: 32px;
-        height: 37px;
-      }
-      .calendar-text {
-        font-size: 10px;
-        color: #988461;
-      }
-    }
-    .menu-challenge {
-      width: 45px;
-      height: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      .challenge-img {
-        width: 34px;
-        height: 35px;
-      }
-      .challenge-text {
-        font-size: 10px;
-        color: #988461;
-      }
     }
   }
 </style>

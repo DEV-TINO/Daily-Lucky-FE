@@ -60,24 +60,17 @@
         아직 아무 챌린지도 없어요...
       </div>
     </div>
-
-    <!-- Bottom Nav -->
-    <div class="bottom-nav">
-      <div
-        v-for="(menu, index) in bottomMenu"
-        :key="index"
-        :class="`menu-${menu}`"
-      >
-        <img :class="`${menu}-img`" :src="`/public/images/${menu}.png`" />
-        <div :class="`${menu}-text`">{{ menu }}</div>
-      </div>
-    </div>
+    <BottomNav></BottomNav>
   </div>
 </template>
 
 <script>
+  import BottomNav from "@/components/BottomNav.vue";
   export default {
     name: "CalendarPage",
+    components: {
+      BottomNav,
+    },
     data() {
       return {
         bottomMenu: ["write", "calendar", "challenge"],
@@ -383,44 +376,6 @@
     .calendar-challenge-contents {
       font-size: 24px;
       color: #958565;
-    }
-  }
-
-  .bottom-nav {
-    width: 100%;
-    height: 64px;
-    margin-bottom: 25px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-top: 1px solid #ddcbac;
-    gap: 50px;
-
-    .menu-write,
-    .menu-calendar,
-    .menu-challenge {
-      width: 45px;
-      height: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-top: 5px;
-    }
-
-    .write-img,
-    .calendar-img,
-    .challenge-img {
-      width: 37px;
-      height: 35px;
-    }
-
-    .write-text,
-    .calendar-text,
-    .challenge-text {
-      font-size: 10px;
-      color: #988461;
     }
   }
 </style>
