@@ -1,7 +1,7 @@
 <template>
-  <div class="splash-container">
+  <div class="splash-container" @click="goToCalendar">
     <div class="main-color splash-title">Daily Lucky</div>
-    <img class="splash-image" src="/images/lucky-lucky.png" />
+    <img class="splash-image" src="/public/images/lucky-lucky.png" />
     <div class="sub-color splash-subtitle sub-color">Touch to Start</div>
   </div>
 </template>
@@ -9,8 +9,10 @@
 <script>
   export default {
     name: "SplashPage",
-    data() {
-      return {};
+    methods: {
+      goToCalendar() {
+        this.$router.push("/calendar");
+      },
     },
   };
 </script>
