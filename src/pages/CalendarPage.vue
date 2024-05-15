@@ -1,16 +1,16 @@
 <template>
   <div class="calendar-container">
     <!-- Top Nav -->
-    <div class="calendar-logo">
+    <div class="logo">
       <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
-      <div class="title">Daily Lucky</div>
+      <div class="title main-color">Daily Lucky</div>
     </div>
 
     <!-- Calendar Top -->
     <div class="calendar-month">
       <div class="month-before" @click="changeMonth(-1)"><</div>
       <div class="month-now">
-        <div class="month">{{ months[currentMonth] }}</div>
+        <div class="month">{{ months?.[currentMonth - 1] }}</div>
         <div class="year">{{ currentYear }}</div>
       </div>
       <div class="month-after" @click="changeMonth(1)">></div>
@@ -18,44 +18,31 @@
 
     <!-- Calendar date -->
     <div class="calendar">
+      <!-- Indecaites -->
       <div class="days">
         <div class="calendar-day" v-for="(day, index) in days" :key="index">
           {{ day }}
         </div>
       </div>
-      <div class="weeks" v-for="(week, index) in 6" :key="index">
-        <div class="dates" v-for="(date, index) in 7" :key="index">
-          <!-- <div class="date-base">
-            <div class="date-base-sun" v-if="date == 1">
-              {{ (week - 1) * 7 + date }}
-            </div>
-            <div class="date-base-sat" v-if="dates == 7">
-              {{ (week - 1) * 7 + date }}
-            </div>
-            <div class="date-base-today" v-if="date != 1 && date != 7">
-              {{ (week - 1) * 7 + date }}
-            </div>
-          </div> -->
 
-          <!-- Selected date -->
-          <div class="date-today-radius">
-            <div class="radius-today">24</div>
+      <!-- Days -->
+      <div class="weeks" v-for="(week, index) in totalWeeks" :key="index">
+        <div class="dates" v-for="(day, index) in week" :key="index">
+          <!-- Default day -->
+          <div class="date-base" v-if="!isToday(day) && day != 0">
+            <div>{{ day }}</div>
           </div>
-          <div class="date-emoji"></div>
-          <div class="date-today-bar"></div>
 
-          <!-- <div class="weeks">
-            <div v-for="(week, index) in calendarData" :key="index">
-              <div class="date-base" v-for="(date, index) in week" :key="index">
-                <div class="date-today-radius" v-if="isToday(date)">
-                  <div class="radius-today">{{ currentDate }}</div>
-                </div>
-                <div v-else>{{ currentDate }}</div>
-                <div class="date-emoji"></div>
-                <div class="date-today-bar" v-if="isToday(date)"></div>
-              </div>
-            </div>
-          </div> -->
+          <!-- Today day -->
+          <div class="date-today-radius" v-if="isToday(day)">
+            <div class="radius-today">{{ day }}</div>
+          </div>
+
+          <!-- Emoji Icon -->
+          <div class="date-emoji" v-if="day != 0"></div>
+
+          <!-- today bar -->
+          <div v-if="isToday(day)" class="date-today-bar"></div>
         </div>
       </div>
     </div>
@@ -76,17 +63,13 @@
 
     <!-- Bottom Nav -->
     <div class="bottom-nav">
-      <div class="menu-write">
-        <img class="write-img" src="/public/images/write.png" />
-        <div class="write-text">write</div>
-      </div>
-      <div class="menu-calendar">
-        <img class="calendar-img" src="/public/images/calendar.png" />
-        <div class="calendar-text">calendar</div>
-      </div>
-      <div class="menu-challenge">
-        <img class="challenge-img" src="/public/images/challenge.png" />
-        <div class="challenge-text">challenge</div>
+      <div
+        v-for="(menu, index) in bottomMenu"
+        :key="index"
+        :class="`menu-${menu}`"
+      >
+        <img :class="`${menu}-img`" :src="`/public/images/${menu}.png`" />
+        <div :class="`${menu}-text`">{{ menu }}</div>
       </div>
     </div>
   </div>
@@ -97,6 +80,7 @@
     name: "CalendarPage",
     data() {
       return {
+        bottomMenu: ["write", "calendar", "challenge"],
         days: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
         months: [
           "January",
@@ -112,69 +96,102 @@
           "November",
           "December",
         ],
-        currentYear: new Date().getFullYear(),
-        currentMonth: new Date().getMonth(),
-        currentDate: new Date().getDate(),
-        daysArray: [],
-        date: 1,
-        calendarData: [],
+        // Today date : Default
+        currentYear: "2001",
+        currentMonth: "12",
+        currentDate: "14",
+
+        // totalWeeks in Month
+        totalWeeks: [],
       };
     },
 
-    mounted() {
-      this.calendarData = this.generateCalendar();
-    },
-
     methods: {
+      initCalendar() {
+        this.currentYear = new Date().getFullYear();
+        this.currentMonth = new Date().getMonth() + 1;
+        this.currentDate = new Date().getDate();
+      },
+
       changeMonth(change) {
         this.currentMonth += change;
-        if (this.currentMonth < 0) {
-          this.currentMonth = 11;
+        if (this.currentMonth < 1) {
+          this.currentMonth = 12;
           this.currentYear -= 1;
-        } else if (this.currentMonth > 11) {
-          this.currentMonth = 0;
+        } else if (this.currentMonth > 12) {
+          this.currentMonth = 1;
           this.currentYear += 1;
         }
-        this.calendarData = this.generateCalendar();
-      },
-      generateCalendar() {
-        this.date = 1;
-        this.daysArray = [];
-        const startDay = new Date(
+        this.totalWeeks = this.getWeeksInMonth(
           this.currentYear,
-          this.currentMonth,
-          1
-        ).getDay();
-        const daysInMonth = new Date(
-          this.currentYear,
-          this.currentMonth + 1,
-          0
-        ).getDate();
-        for (let i = 0; i < 6; i++) {
-          this.daysArray.push([]);
-          for (let j = 0; j < 7; j++) {
-            if (this.date > daysInMonth) {
-              break;
-            } else {
-              this.daysArray[i][j] = new Date(
-                this.currentYear,
-                this.currentMonth,
-                this.date
-              );
-              this.date++;
-            }
-          }
-        }
-        return this.daysArray;
-        console.log(this.daysArray);
-      },
-      isToday(date) {
-        return (
-          date.getFullYear() === new Date().getFullYear() &&
-          date.getMonth() === new Date().getMonth() &&
-          date.getDate() === new Date().getDate()
+          this.currentMonth
         );
       },
+
+      isToday(date) {
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth() + 1;
+
+        if (
+          currentYear === this.currentYear &&
+          currentMonth === this.currentMonth &&
+          date === this.currentDate
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+
+      getWeeksInMonth(year, month) {
+        const first = new Date(year, month - 1, 1);
+        const last = new Date(year, month, 0);
+
+        const firstDate = first.getDate();
+        const lastDate = last.getDate();
+
+        const firstDay = first.getDay();
+        const lastDay = last.getDay();
+
+        const totalDays = lastDate - firstDate + 1;
+
+        const daysInFirstWeek = 7 - firstDay;
+        const lastDays = totalDays - daysInFirstWeek;
+        const totalWeeks = Math.ceil(lastDays / 7) + 1;
+
+        let remainDays = totalDays;
+        let currentDay = 1;
+
+        const weeks = new Array(totalWeeks)
+          .fill(new Array(7).fill(0))
+          .map((week, weekIndex) => {
+            return week.map((day, dayIndex) => {
+              if (weekIndex == 0) {
+                if (dayIndex >= firstDay) {
+                  remainDays -= 1;
+                  return currentDay++;
+                } else return 0;
+              } else {
+                if (remainDays > 0) {
+                  remainDays -= 1;
+                  return currentDay++;
+                } else {
+                  return 0;
+                }
+              }
+            });
+          });
+
+        return weeks;
+      },
+    },
+
+    mounted() {
+      this.initCalendar();
+      this.totalWeeks = this.getWeeksInMonth(
+        this.currentYear,
+        this.currentMonth
+      );
     },
   };
 </script>
@@ -186,7 +203,7 @@
     flex-direction: column;
     align-items: center;
   }
-  .calendar-logo {
+  .logo {
     margin-top: 51px;
     height: 68px;
     width: 100%;
@@ -199,7 +216,6 @@
       margin-bottom: 5px;
     }
     .title {
-      color: #958565;
       font-size: 10px;
     }
   }
@@ -208,26 +224,31 @@
     height: 72px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 80px;
     color: #958565;
     font-size: 32px;
+
     .month-before,
     .month-after {
+      padding-left: 20px;
+      padding-right: 20px;
       width: 50px;
       display: flex;
       justify-content: center;
     }
+
     .month-now {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
       .month {
         font-size: 48px;
         margin-bottom: 5px;
       }
+
       .year {
         font-size: 10px;
         margin-bottom: 10px;
@@ -244,6 +265,7 @@
     height: 46px;
     gap: 15px;
   }
+
   .calendar-day {
     display: flex;
     flex-direction: row;
@@ -255,79 +277,94 @@
     font-size: 18px;
     border-bottom: 2px solid #958565;
   }
+
   .calendar-day:first-child {
     color: #dd6262;
     border-bottom: 2px solid #dd6262;
   }
+
   .calendar-day:last-child {
     color: #737fe9;
     border-bottom: 2px solid #737fe9;
   }
+
   .weeks {
     width: 100%;
-    height: 60.5px;
+    height: 63px;
     display: flex;
     flex-direction: row;
     gap: 8px;
-    padding-bottom: 8px;
     align-items: center;
     font-size: 14px;
     color: #4c3a15;
-  }
-  .dates {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .date-base {
-      width: 100%;
-      height: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .date-base-sun {
-        color: #dd6262;
-      }
-      .date-base-sat {
-        color: #737fe9;
-      }
-    }
-    .date-emoji {
-      background-image: url("/public/images/lucky-happy.png");
-      background-position: center;
-      background-size: contain;
-      background-repeat: no-repeat;
-      width: 100%;
+
+    .dates {
       height: 100%;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-    .date-today-radius {
-      width: 16px;
-      height: 16px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      border-radius: 50%;
-      color: #ffffff;
-      background-color: rgba(149, 133, 101, 0.45);
-      .radius-today {
-        margin-bottom: 2px;
-        margin-left: 1px;
+      position: relative;
+
+      .date-base {
+        width: 100%;
+        height: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .date-base-sun {
+          color: #dd6262;
+        }
+
+        .date-base-sat {
+          color: #737fe9;
+        }
+      }
+
+      .date-emoji {
+        background-image: url("/public/images/lucky-happy.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .date-today-radius {
+        width: 16px;
+        height: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        border-radius: 50%;
+        color: #ffffff;
+        background-color: rgba(149, 133, 101, 0.45);
+
+        .radius-today {
+          margin-bottom: 2px;
+          margin-left: 1px;
+        }
+      }
+
+      .date-today-bar {
+        width: 35px;
+        height: 4px;
+        border-radius: 5px;
+        background-color: #cbc3ae;
+        position: absolute;
+        bottom: 0;
       }
     }
-    .date-today-bar {
-      width: 35px;
-      height: 4px;
-      border-radius: 5px;
-      background-color: #cbc3ae;
-    }
   }
+
   .fill-space {
     flex-grow: 1;
   }
+
   .calendar-challenge {
     width: 100%;
     height: 141px;
@@ -336,16 +373,19 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(249, 233, 197, 0.35);
+
     .calendar-challenge-image {
       width: 87px;
       height: 72px;
       margin-right: 28px;
     }
+
     .calendar-challenge-contents {
       font-size: 24px;
       color: #958565;
     }
   }
+
   .bottom-nav {
     width: 100%;
     height: 64px;
@@ -356,6 +396,7 @@
     align-items: center;
     border-top: 1px solid #ddcbac;
     gap: 50px;
+
     .menu-write,
     .menu-calendar,
     .menu-challenge {
@@ -367,12 +408,14 @@
       justify-content: center;
       margin-top: 5px;
     }
+
     .write-img,
     .calendar-img,
     .challenge-img {
       width: 37px;
       height: 35px;
     }
+
     .write-text,
     .calendar-text,
     .challenge-text {

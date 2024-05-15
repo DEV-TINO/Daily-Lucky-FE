@@ -2,9 +2,9 @@
   <div class="screen">
     <!-- <NewWritePage v-if="currentPage == 0"></NewWritePage> -->
     <SplashPage v-if="currentPage == 1" @click="currentPage = 2" />
-    <CalendarPage v-if="currentPage == 2" @click="currentPage = 3" />
-    <WritePage v-if="currentPage == 3" @click="currentPage = 4" />
-    <ChallengePage v-if="currentPage == 4" @click="currentPage = 5" />
+    <CalendarPage v-if="currentPage == 2" />
+    <WritePage v-if="currentPage == 3" />
+    <ChallengePage v-if="currentPage == 4" />
     <CreateChallengePage v-if="currentPage == 5" />
   </div>
 </template>
