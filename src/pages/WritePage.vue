@@ -1,74 +1,77 @@
 <template>
   <div class="write-container">
-    <!-- Top Nav -->
-    <div class="top">
-      <!-- <div class="delete" :class="isHidden ? 'is-hidden' : ''>삭제하기</div> -->
-      <div class="logo" @click="isHidden = !isHidden">
-        <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
-        <div class="title main-color">Daily Lucky</div>
-      </div>
-    </div>
-    <!-- Select Emoji -->
-    <div class="today-moods">
-      <div class="moods-text">
-        <div class="todays main-color">
-          Today's <span class="is-red">Mood!</span>
+    <!-- Contents -->
+    <div>
+      <!-- Top Nav -->
+      <div class="top">
+        <!-- <div class="delete" :class="isHidden ? 'is-hidden' : ''>삭제하기</div> -->
+        <div class="logo" @click="isHidden = !isHidden">
+          <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
+          <div class="title main-color">Daily Lucky</div>
         </div>
       </div>
-      <div class="moods-emojis">
-        <div
-          class="emoji"
-          :class="currentSelected === emoji ? '' : 'is-gray'"
-          v-for="(emoji, index) in emojis"
-          :key="index"
-          @click="currentSelected = emoji"
-        >
-          <img :class="emoji" :src="`/public/images/lucky-${emoji}.png`" />
-          <div class="moods-emoji-text">
-            {{ emoji }}
+      <!-- Select Emoji -->
+      <div class="today-moods">
+        <div class="moods-text">
+          <div class="todays main-color">
+            Today's <span class="is-red">Mood!</span>
+          </div>
+        </div>
+        <div class="moods-emojis">
+          <div
+            class="emoji"
+            :class="currentSelected === emoji ? '' : 'is-gray'"
+            v-for="(emoji, index) in emojis"
+            :key="index"
+            @click="currentSelected = emoji"
+          >
+            <img :class="emoji" :src="`/public/images/lucky-${emoji}.png`" />
+            <div class="moods-emoji-text">
+              {{ emoji }}
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Write Contents -->
-    <div class="writing">
-      <div class="writing-date">
-        <div class="month-year main-color">MAY 2024</div>
-        <div class="date-day main-color">24 Friday</div>
-      </div>
-      <textarea
-        class="lined-textarea"
-        placeholder="Write today's diary"
-      ></textarea>
-      <div class="upload-image" @click="handleClickUploadImage()">
-        <input
-          ref="upload"
-          type="file"
-          hidden
-          @change="handleUploadImage($event)"
-        />
-        <div
-          style="
-            width: 100%;
-            height: 400px;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-          "
-          v-if="imageUrl != ''"
-          :style="{ backgroundImage: `url(${this.imageUrl})` }"
-        ></div>
-        <img
-          v-if="imageUrl == ''"
-          class="img"
-          src="/public/images/cloud-arrow-up.png"
-        />
-        <div v-if="imageUrl == ''" class="img-text main-color">
-          Upload Image
+      <!-- Write Contents -->
+      <div class="writing">
+        <div class="writing-date">
+          <div class="month-year main-color">MAY 2024</div>
+          <div class="date-day main-color">24 Friday</div>
         </div>
+        <textarea
+          class="lined-textarea"
+          placeholder="Write today's diary"
+        ></textarea>
+        <div class="upload-image" @click="handleClickUploadImage()">
+          <input
+            ref="upload"
+            type="file"
+            hidden
+            @change="handleUploadImage($event)"
+          />
+          <div
+            style="
+              width: 100%;
+              height: 400px;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: contain;
+            "
+            v-if="imageUrl != ''"
+            :style="{ backgroundImage: `url(${this.imageUrl})` }"
+          ></div>
+          <img
+            v-if="imageUrl == ''"
+            class="img"
+            src="/public/images/cloud-arrow-up.png"
+          />
+          <div v-if="imageUrl == ''" class="img-text main-color">
+            Upload Image
+          </div>
+        </div>
+        <div class="upload-button">글쓰기</div>
       </div>
-      <div class="upload-button">글쓰기</div>
     </div>
 
     <!-- Bottom Nav -->
@@ -123,6 +126,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
   .logo {
     margin-top: 51px;
