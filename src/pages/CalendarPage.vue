@@ -1,66 +1,77 @@
 <template>
   <div class="calendar-container">
-    <!-- Top Nav -->
-    <div class="logo">
-      <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
-      <div class="title main-color">Daily Lucky</div>
-    </div>
-
-    <!-- Calendar Top -->
-    <div class="calendar-month">
-      <div class="month-before" @click="changeMonth(-1)"><</div>
-      <div class="month-now">
-        <div class="month">{{ months?.[currentMonth - 1] }}</div>
-        <div class="year">{{ currentYear }}</div>
+    <!-- contents -->
+    <div>
+      <!-- Top Nav -->
+      <div class="logo">
+        <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
+        <div class="title main-color">Daily Lucky</div>
       </div>
-      <div class="month-after" @click="changeMonth(1)">></div>
-    </div>
 
-    <!-- Calendar date -->
-    <div class="calendar">
-      <!-- Indecaites -->
-      <div class="days">
-        <div class="calendar-day" v-for="(day, index) in days" :key="index">
-          {{ day }}
+      <!-- Calendar Top -->
+      <div class="calendar-month">
+        <div class="month-before" @click="changeMonth(-1)">
+          {{ indicators[0] }}
+        </div>
+        <div class="month-now">
+          <div class="month">{{ months?.[currentMonth - 1] }}</div>
+          <div class="year">{{ currentYear }}</div>
+        </div>
+        <div class="month-after" @click="changeMonth(1)">
+          {{ indicators[1] }}
         </div>
       </div>
 
-      <!-- Days -->
-      <div class="weeks" v-for="(week, index) in totalWeeks" :key="index">
-        <div class="dates" v-for="(day, index) in week" :key="index">
-          <!-- Default day -->
-          <div class="date-base" v-if="!isToday(day) && day != 0">
-            <div>{{ day }}</div>
+      <!-- Calendar date -->
+      <div class="calendar">
+        <!-- Indecaites -->
+        <div class="days">
+          <div class="calendar-day" v-for="(day, index) in days" :key="index">
+            {{ day }}
           </div>
+        </div>
 
-          <!-- Today day -->
-          <div class="date-today-radius" v-if="isToday(day)">
-            <div class="radius-today">{{ day }}</div>
+        <!-- Days -->
+        <div class="weeks" v-for="(week, index) in totalWeeks" :key="index">
+          <div class="dates" v-for="(day, index) in week" :key="index">
+            <!-- Default day -->
+            <div class="date-base" v-if="!isToday(day) && day != 0">
+              <div>{{ day }}</div>
+            </div>
+
+            <!-- Today day -->
+            <div class="date-today-radius" v-if="isToday(day)">
+              <div class="radius-today">{{ day }}</div>
+            </div>
+
+            <!-- Emoji Icon -->
+            <div class="date-emoji" v-if="day != 0"></div>
+
+            <!-- today bar -->
+            <div v-if="isToday(day)" class="date-today-bar"></div>
           </div>
-
-          <!-- Emoji Icon -->
-          <div class="date-emoji" v-if="day != 0"></div>
-
-          <!-- today bar -->
-          <div v-if="isToday(day)" class="date-today-bar"></div>
         </div>
       </div>
+
+      <!-- Fill Space -->
+      <div class="fill-space"></div>
+
+      <!-- Selected Challenge -->
     </div>
-
-    <!-- Fill Space -->
-    <div class="fill-space"></div>
-
-    <!-- Selected Challenge -->
-    <div class="calendar-challenge sub-color">
-      <img
-        class="calendar-challenge-image"
-        src="/public/images/lucky-sad.png"
-      />
-      <div class="calendar-challenge-contents">
-        아직 아무 챌린지도 없어요...
+    <div>
+      <div class="calendar-challenge sub-color">
+        <img
+          class="calendar-challenge-image"
+          src="/public/images/lucky-sad.png"
+        />
+        <div class="calendar-challenge-contents">
+          아직 아무 챌린지도 없어요...
+        </div>
       </div>
+
+      <BottomNav></BottomNav>
     </div>
-    <BottomNav></BottomNav>
+    <!-- Bottom Nav -->
   </div>
 </template>
 
@@ -73,6 +84,7 @@
     },
     data() {
       return {
+        indicators: ["<", ">"],
         bottomMenu: ["write", "calendar", "challenge"],
         days: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
         months: [
@@ -192,9 +204,11 @@
 <style scoped>
   .calendar-container {
     height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
   }
   .logo {
     margin-top: 51px;
