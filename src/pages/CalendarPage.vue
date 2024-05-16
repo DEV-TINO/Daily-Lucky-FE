@@ -58,7 +58,7 @@
     </div>
 
     <!-- Selected Challenge -->
-    <div>
+    <div class="challenge-content">
       <div class="calendar-challenge sub-color">
         <img
           class="calendar-challenge-image"
@@ -68,10 +68,10 @@
           아직 아무 챌린지도 없어요...
         </div>
       </div>
-
-      <BottomNav></BottomNav>
     </div>
+
     <!-- Bottom Nav -->
+    <BottomNav></BottomNav>
   </div>
 </template>
 
@@ -377,25 +377,33 @@
   .fill-space {
     flex-grow: 1;
   }
-
-  .calendar-challenge {
+  .challenge-content {
     width: 100%;
-    height: 141px;
+    height: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background-color: rgba(249, 233, 197, 0.35);
+    justify-content: end;
 
-    .calendar-challenge-image {
-      width: 87px;
-      height: 72px;
-      margin-right: 28px;
-    }
+    .calendar-challenge {
+      width: 100%;
+      height: 141px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(249, 233, 197, 0.35);
 
-    .calendar-challenge-contents {
-      font-size: 24px;
-      color: #958565;
+      .calendar-challenge-image {
+        width: 87px;
+        height: 72px;
+        margin-right: 28px;
+      }
+
+      .calendar-challenge-contents {
+        font-size: 24px;
+        color: #958565;
+      }
     }
   }
 </style>
