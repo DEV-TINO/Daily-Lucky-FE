@@ -1,7 +1,7 @@
 <template>
   <div class="calendar-container">
     <!-- contents -->
-    <div>
+    <div class="calendar-content">
       <!-- Top Nav -->
       <div class="logo">
         <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
@@ -55,9 +55,9 @@
 
       <!-- Fill Space -->
       <div class="fill-space"></div>
-
-      <!-- Selected Challenge -->
     </div>
+
+    <!-- Selected Challenge -->
     <div>
       <div class="calendar-challenge sub-color">
         <img
@@ -208,7 +208,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+  }
+  .calendar-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .logo {
     margin-top: 51px;
