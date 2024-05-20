@@ -6,7 +6,7 @@
       <div class="top">
         <!-- <div class="delete" :class="isHidden ? 'is-hidden' : ''>삭제하기</div> -->
         <div class="logo" @click="isHidden = !isHidden">
-          <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
+          <img class="logo-emoji" src="/images/lucky-lucky.png" />
           <div class="title main-color">Daily Lucky</div>
         </div>
       </div>
@@ -20,12 +20,12 @@
         <div class="moods-emojis">
           <div
             class="emoji"
-            :class="currentSelected === emoji ? '' : 'is-gray'"
+            :class="emojiType === emoji ? '' : 'is-gray'"
             v-for="(emoji, index) in emojis"
             :key="index"
-            @click="currentSelected = emoji"
+            @click="emojiType = emoji"
           >
-            <img :class="emoji" :src="`/public/images/lucky-${emoji}.png`" />
+            <img :class="emoji" :src="`/images/lucky-${emoji}.png`" />
             <div class="moods-emoji-text">
               {{ emoji }}
             </div>
@@ -36,12 +36,19 @@
       <!-- Write Contents -->
       <div class="writing">
         <div class="writing-date">
-          <div class="month-year main-color">MAY 2024</div>
-          <div class="date-day main-color">24 Friday</div>
+          <div class="month-year main-color">
+            {{ MONTHS[this.$store.state.calendarSelected.month - 1] }}
+            {{ this.$store.state.calendarSelected.year }}
+          </div>
+          <div class="date-day main-color">
+            {{ this.$store.state.calendarSelected.date }}
+            {{ DAYS[this.$store.state.calendarSelected.day] }}
+          </div>
         </div>
         <textarea
           class="lined-textarea"
           placeholder="Write today's diary"
+          v-model="content"
         ></textarea>
         <div class="upload-image" @click="handleClickUploadImage()">
           <input
@@ -64,13 +71,13 @@
           <img
             v-if="imageUrl == ''"
             class="img"
-            src="/public/images/cloud-arrow-up.png"
+            src="/images/cloud-arrow-up.png"
           />
           <div v-if="imageUrl == ''" class="img-text main-color">
             Upload Image
           </div>
         </div>
-        <div class="upload-button">글쓰기</div>
+        <div class="upload-button" @click="handleClickWriteDiary()">글쓰기</div>
       </div>
     </div>
 
@@ -85,17 +92,76 @@
     name: "WritePage",
     data() {
       return {
+        MONTHS: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ],
+        DAYS: {
+          SUN: "Sunday",
+          MON: "Monday",
+          TUE: "Tuesday",
+          WED: "Wednesday",
+          THU: "Thursday",
+          FRI: "Friday",
+          SAT: "Saturday",
+        },
         isHidden: false,
         emojis: ["lucky", "happy", "sad", "angry"],
-        currentSelected: "lucky",
+        emojiType: "lucky", // == emojiType
         bottomMenu: ["write", "calendar", "challenge"],
         imageUrl: "",
+        content: "", // 작성한 일기....
+        post: {},
       };
     },
     components: {
       BottomNav,
     },
+    mounted() {
+      this.post = this.$store.state.posts.filter((post, index) => {
+        return (
+          post.date === this.$store.state.calendarSelected.date &&
+          post.month === this.$store.state.calendarSelected.month &&
+          post.year === this.$store.state.calendarSelected.year
+        );
+      })[0];
+      if (this.post) {
+        console.log(this.post);
+        this.content = this.post.content;
+        this.emojiType = this.post.emoji;
+      }
+    },
     methods: {
+      handleClickWriteDiary() {
+        const post = {
+          ...this.$store.state.calendarSelected,
+          emoji: this.emojiType,
+          content: this.content,
+          imageUrl: this.imageUrl,
+        };
+        console.log(post);
+        if (!this.post) {
+          this.$store.commit("addPost", post);
+        } else {
+          this.$store.commit("updatePost", post);
+        }
+
+        // 1. TODO: Save Diary according to API Docs..
+        // 2. TODO: Send to Server
+
+        // Move to Calendar Page
+        this.$router.push("/calendar");
+      },
       handleClickUploadImage() {
         this.$refs.upload.click();
       },
