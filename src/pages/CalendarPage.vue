@@ -4,7 +4,7 @@
     <div class="calendar-content">
       <!-- Top Nav -->
       <div class="logo">
-        <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
+        <img class="logo-emoji" src="/images/lucky-lucky.png" />
         <div class="title main-color">Daily Lucky</div>
       </div>
 
@@ -32,8 +32,22 @@
         </div>
 
         <!-- Days -->
-        <div class="weeks" v-for="(week, index) in totalWeeks" :key="index">
-          <div class="dates" v-for="(day, index) in week" :key="index">
+        <div
+          class="weeks"
+          v-for="(week, weekIndex) in totalWeeks"
+          :key="weekIndex"
+        >
+          <div
+            class="dates"
+            v-for="(day, index) in week"
+            :key="index"
+            @click="
+              handleClickCalendarSelected(
+                day, // dates...
+                days[index]
+              )
+            "
+          >
             <!-- Default day -->
             <div class="date-base" v-if="!isToday(day) && day != 0">
               <div>{{ day }}</div>
@@ -45,7 +59,17 @@
             </div>
 
             <!-- Emoji Icon -->
-            <div class="date-emoji" v-if="day != 0"></div>
+            <div
+              class="date-emoji"
+              v-if="day != 0"
+              :style="
+                checkPostExist(day, days[index])
+                  ? {
+                      backgroundImage: `url(${getPostEmoji(day, days[index])})`,
+                    }
+                  : {}
+              "
+            ></div>
 
             <!-- today bar -->
             <div v-if="isToday(day)" class="date-today-bar"></div>
@@ -60,10 +84,7 @@
     <!-- Selected Challenge -->
     <div class="challenge-content">
       <div class="calendar-challenge sub-color">
-        <img
-          class="calendar-challenge-image"
-          src="/public/images/lucky-sad.png"
-        />
+        <img class="calendar-challenge-image" src="/images/lucky-sad.png" />
         <div class="calendar-challenge-contents">
           아직 아무 챌린지도 없어요...
         </div>
@@ -101,6 +122,7 @@
           "November",
           "December",
         ],
+
         // Today date : Default
         currentYear: "2001",
         currentMonth: "12",
@@ -112,6 +134,70 @@
     },
 
     methods: {
+      // 캘린더의 월, 일, 년, 달을 가지고 -> post를 가져와야함..
+      // 만약에 포스트가 있으면 가져와서 이모지가 보여지는데...
+      // 만약에 포스트가 없으면..? 이모지가 안보이겠죠!!
+      checkPostExist(date, day) {
+        const check = this.$store.state.posts.filter((post, index) => {
+          return (
+            post.year == this.currentYear &&
+            post.month == this.currentMonth &&
+            post.date == date &&
+            post.day == day
+          );
+        });
+
+        if (check.length > 0) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+
+      getPostEmoji(date, day) {
+        const emoji = this.$store.state.posts.filter((post, index) => {
+          return (
+            post.year == this.currentYear &&
+            post.month == this.currentMonth &&
+            post.date == date &&
+            post.day == day
+          );
+        })[0].emoji;
+        return `/images/lucky-${emoji}.png`;
+      },
+
+      isFuture(calendarSelected) {
+        const current = {
+          year: new Date().getFullYear(),
+          month: new Date().getMonth() + 1,
+          date: new Date().getDate(),
+        };
+        if (calendarSelected.year > current.year) return true;
+        if (calendarSelected.month > current.month) return true;
+        if (calendarSelected.date > current.date) return true;
+        return false;
+      },
+
+      handleClickCalendarSelected(date, day) {
+        const calendarSelected = {
+          year: this.currentYear,
+          month: this.currentMonth,
+          date: date,
+          day: day,
+        };
+
+        if (this.isFuture(calendarSelected)) {
+          alert("미래에 대한 일기는 쓸 수 없습니다... 바보..");
+          return;
+        }
+
+        // Save calendarSelected to store
+        this.$store.commit("setCalendarSelected", calendarSelected);
+
+        // Move to WritePage
+        this.$router.push("/write");
+      },
+
       initCalendar() {
         this.currentYear = new Date().getFullYear();
         this.currentMonth = new Date().getMonth() + 1;
@@ -336,7 +422,7 @@
       }
 
       .date-emoji {
-        background-image: url("/public/images/lucky-happy.png");
+        /* background-image: url("/images/lucky-happy.png"); */
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
