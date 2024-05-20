@@ -7,7 +7,7 @@
       :class="`menu-${menu}`"
       @click="handleClickMenu(menu)"
     >
-      <img :class="`${menu}-img`" :src="`/public/images/${menu}.png`" />
+      <img :class="`${menu}-img`" :src="`/images/${menu}.png`" />
       <div :class="`${menu}-text`">{{ menu }}</div>
     </div>
   </div>
@@ -37,6 +37,8 @@
 <style lang="css" scoped>
   .bottom-nav {
     width: 100%;
+    min-height: 64px;
+    max-height: 64px;
     height: 64px;
     margin-bottom: 25px;
     display: flex;
