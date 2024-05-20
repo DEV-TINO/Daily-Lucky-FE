@@ -3,7 +3,7 @@
     <!-- Top Nav -->
     <div class="top">
       <div class="logo">
-        <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
+        <img class="logo-emoji" src="/images/lucky-lucky.png" />
         <div class="title">Daily Lucky</div>
       </div>
     </div>
@@ -28,7 +28,7 @@
       <div class="list-text main-color">List</div>
       <div class="list-box">
         <div class="no-list">
-          <img class="no-list-img" src="/public/images/lucky-sad.png" />
+          <img class="no-list-img" src="/images/lucky-sad.png" />
           <div class="no-list-context main-color">
             아직 아무 챌린지도 없어요...
           </div>
@@ -59,6 +59,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
   .top {
     width: 100%;

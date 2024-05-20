@@ -3,7 +3,7 @@
     <!-- Top Nav -->
     <div class="top">
       <div class="logo">
-        <img class="logo-emoji" src="/public/images/lucky-lucky.png" />
+        <img class="logo-emoji" src="/images/lucky-lucky.png" />
         <div class="title main-color">Daily Lucky</div>
       </div>
     </div>
@@ -43,15 +43,15 @@
     <!-- Bottom Nav -->
     <div class="bottom-nav">
       <div class="menu-write">
-        <img class="write-img" src="/public/images/write.png" />
+        <img class="write-img" src="/images/write.png" />
         <div class="write-text">write</div>
       </div>
       <div class="menu-calendar">
-        <img class="calendar-img" src="/public/images/calendar.png" />
+        <img class="calendar-img" src="/images/calendar.png" />
         <div class="calendar-text">calendar</div>
       </div>
       <div class="menu-challenge">
-        <img class="challenge-img" src="/public/images/challenge.png" />
+        <img class="challenge-img" src="/images/challenge.png" />
         <div class="challenge-text">challenge</div>
       </div>
     </div>
@@ -124,7 +124,7 @@
           height: 37px;
           margin-bottom: 27px;
           box-sizing: border-box;
-          background-image: url("/public/images/line.png");
+          background-image: url("/images/line.png");
           background-position: bottom;
           background-size: contain;
           background-repeat: no-repeat;
@@ -147,7 +147,7 @@
           width: 100%;
           height: 80px;
           box-sizing: border-box;
-          background-image: url("/public/images/line2.png");
+          background-image: url("/images/line2.png");
           background-position: bottom;
           background-size: contain;
           background-repeat: no-repeat;
