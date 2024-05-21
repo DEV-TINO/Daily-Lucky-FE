@@ -9,7 +9,7 @@ const store = createStore({
         date: 14,
         day: "SUN",
       },
-      posts: [],
+      posts: [], // saved Post data
     };
   },
   mutations: {
@@ -35,6 +35,16 @@ const store = createStore({
       if (index !== -1) {
         state.posts[index] = post;
       }
+    },
+    deletePost(state, dateInfo) {
+      state.posts = state.posts.filter(
+        (post) =>
+          !(
+            post.date === dateInfo.date &&
+            post.month === dateInfo.month &&
+            post.year === dateInfo.year
+          )
+      );
     },
   },
 });

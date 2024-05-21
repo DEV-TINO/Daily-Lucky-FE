@@ -1,10 +1,18 @@
+<!-- 삭제하기 버튼 클릭시 게시물 삭제되는 기능 -->
+<!-- 사진 업로드 후 사진 저장되는 기능 -->
 <template>
   <div class="write-container">
     <!-- Contents -->
     <div>
       <!-- Top Nav -->
       <div class="top">
-        <!-- <div class="delete" :class="isHidden ? 'is-hidden' : ''>삭제하기</div> -->
+        <div
+          class="delete is-red"
+          :class="isHidden ? 'is-hidden' : ''"
+          @click="handleDeletePost"
+        >
+          삭제하기
+        </div>
         <div class="logo" @click="isHidden = !isHidden">
           <img class="logo-emoji" src="/images/lucky-lucky.png" />
           <div class="title main-color">Daily Lucky</div>
@@ -169,6 +177,16 @@
         const uploadFiles = event.target.files;
         this.imageUrl = URL.createObjectURL(uploadFiles[0]);
       },
+      handleDeletePost() {
+        if (this.post) {
+          this.$store.commit("deletePost", {
+            date: this.$store.state.calendarSelected.date,
+            month: this.$store.state.calendarSelected.month,
+            year: this.$store.state.calendarSelected.year,
+          });
+        }
+        this.$router.push("/calendar");
+      },
     },
   };
 </script>
@@ -193,6 +211,17 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+  .delete {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* top, right, bottom, left */
+    top: 25px;
+    right: 0px;
+    height: 35px;
+    width: 80px;
   }
   .logo {
     margin-top: 51px;
