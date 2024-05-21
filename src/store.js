@@ -17,9 +17,9 @@ const store = createStore({
       state.calendarSelected = { ...selected };
     },
     addPost(state, post) {
-      console.log("before add post", state.posts);
+      // console.log("before add post", state.posts);
       state.posts.push(post);
-      console.log("after add post", state.posts);
+      // console.log("after add post", state.posts);
     },
     updatePost(state, post) {
       const index = state.posts.findIndex((currentPost) => {

@@ -1,4 +1,3 @@
-<!-- 삭제하기 버튼 클릭시 게시물 삭제되는 기능 -->
 <!-- 사진 업로드 후 사진 저장되는 기능 -->
 <template>
   <div class="write-container">
@@ -147,6 +146,7 @@
         console.log(this.post);
         this.content = this.post.content;
         this.emojiType = this.post.emoji;
+        this.imageUrl = this.post.imageUrl;
       }
     },
     methods: {
