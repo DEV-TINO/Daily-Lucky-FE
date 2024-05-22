@@ -35,7 +35,9 @@
         </div>
       </div>
       <!-- Make Challenge Button -->
-      <div class="challenge-make-btn">챌린지 만들러 가기</div>
+      <div class="challenge-make-btn" @click="handleClickMakeChallenge">
+        챌린지 만들러 가기
+      </div>
     </div>
 
     <!-- Bottom Nav -->
@@ -49,6 +51,11 @@
     name: "ChallengePage",
     components: {
       BottomNav,
+    },
+    methods: {
+      handleClickMakeChallenge() {
+        this.$router.push("/create-challenge");
+      },
     },
   };
 </script>
