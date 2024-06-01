@@ -76,33 +76,28 @@
           </div>
         </div>
       </div>
-
-      <!-- Fill Space -->
-      <div class="fill-space"></div>
     </div>
 
     <!-- Selected Challenge -->
     <div class="challenge-content">
       <div class="calendar-challenge sub-color">
-        <img class="calendar-challenge-image" src="/images/lucky-sad.png" />
-        <div class="calendar-challenge-contents">
-          아직 아무 챌린지도 없어요...
+        <div class="challenge-box">
+          <img class="calendar-challenge-image" src="/images/lucky-sad.png" />
+          <div class="calendar-challenge-contents">
+            아직 아무 챌린지도 없어요...
+          </div>
         </div>
       </div>
     </div>
+    <div style="width: 100%; min-height: 81px; height: 81px"></div>
 
     <!-- Bottom Nav -->
-    <BottomNav></BottomNav>
   </div>
 </template>
 
 <script>
-  import BottomNav from "@/components/BottomNav.vue";
   export default {
     name: "CalendarPage",
-    components: {
-      BottomNav,
-    },
     data() {
       return {
         indicators: ["<", ">"],
@@ -172,19 +167,24 @@
           month: new Date().getMonth() + 1,
           date: new Date().getDate(),
         };
-        if (calendarSelected.year > current.year) return true;
-        if (calendarSelected.month > current.month) return true;
-        if (calendarSelected.date > current.date) return true;
-        return false;
+
+        if (calendarSelected.year < current.year) return false;
+        if (calendarSelected.month < current.month) return false;
+        if (calendarSelected.date < current.date) return false;
+        return true;
       },
 
       handleClickCalendarSelected(date, day) {
+        if (!date) return;
+
+        // if date is not zero
         const calendarSelected = {
           year: this.currentYear,
           month: this.currentMonth,
           date: date,
           day: day,
         };
+        console.log(calendarSelected);
 
         if (this.isFuture(calendarSelected)) {
           alert("미래에 대한 일기는 쓸 수 없습니다... 바보..");
@@ -294,13 +294,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
   }
   .calendar-content {
     width: 100%;
-    height: 100%;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 30px;
   }
   .logo {
     margin-top: 51px;
@@ -422,11 +424,10 @@
       }
 
       .date-emoji {
-        /* background-image: url("/images/lucky-happy.png"); */
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
-        width: 100%;
+        width: 90%;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -460,25 +461,27 @@
     }
   }
 
-  .fill-space {
-    flex-grow: 1;
-  }
   .challenge-content {
     width: 100%;
-    height: 100%;
+    height: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-start;
 
     .calendar-challenge {
       width: 100%;
-      height: 141px;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
+      height: 120px;
       background-color: rgba(249, 233, 197, 0.35);
+
+      .challenge-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 120px;
+      }
 
       .calendar-challenge-image {
         width: 87px;
