@@ -15,52 +15,86 @@
         <div class="create-contents">
           <div class="challenge-title main-color">Title</div>
           <textarea
+            v-model="challengeTitle"
             class="challenge-title-textarea main-color"
             placeholder="Write challenge title"
           ></textarea>
           <div class="challenge-contents main-color">Contents</div>
           <textarea
+            v-model="challengeContents"
             class="challenge-contents-textarea main-color"
             placeholder="Write challenge contents"
           ></textarea>
         </div>
       </div>
       <!-- Select Date -->
-      <div class="select-date">
+      <div class="select-date-container">
         <div class="select-date-text main-color">Due to</div>
         <div class="start-date">
           <div class="start-text">Start from..</div>
-          <div class="start-select main-color">시작날짜선택</div>
+          <div class="start-select main-color">
+            <div class="select-date">
+              <div class="date-box">
+                <div>MAY</div>
+                <div>2024</div>
+                <div>⌄</div>
+              </div>
+              <div class="date-box">
+                <div>24</div>
+                <div>Friday</div>
+                <div>⌄</div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="end-date">
           <div class="end-text">End to..</div>
-          <div class="end-select main-color">끝나는날짜선택</div>
+          <div class="end-select main-color">
+            <div class="select-date">
+              <div class="date-box">
+                <div>MAY</div>
+                <div>2024</div>
+                <div>⌄</div>
+              </div>
+              <div class="date-box">
+                <div>24</div>
+                <div>Friday</div>
+                <div>⌄</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Save Button -->
-      <div class="save-btn">저장하기!</div>
+      <div class="save-btn" @click="saveChallenge">저장하기!</div>
     </div>
     <!-- Bottom Nav -->
-    <div class="bottom-nav">
-      <div class="menu-write">
-        <img class="write-img" src="/images/write.png" />
-        <div class="write-text">write</div>
-      </div>
-      <div class="menu-calendar">
-        <img class="calendar-img" src="/images/calendar.png" />
-        <div class="calendar-text">calendar</div>
-      </div>
-      <div class="menu-challenge">
-        <img class="challenge-img" src="/images/challenge.png" />
-        <div class="challenge-text">challenge</div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
   export default {
     name: "CreateChallengePage",
+    data() {
+      return {
+        challengeTitle: "",
+        challengeContents: "",
+      };
+    },
+    methods: {
+      saveChallenge() {
+        const newChallenge = {
+          title: this.challengeTitle,
+          content: this.challengeContents,
+          dueDate: "2024-12-14",
+        };
+        console.log(this.challengeTitle);
+        console.log(this.challengeContents);
+        console.log("Saving Challenge:", newChallenge);
+        this.$store.dispatch("createChallenge", newChallenge);
+        this.$router.push("/challenge");
+      },
+    },
   };
 </script>
 
@@ -95,14 +129,14 @@
     }
   }
   .create-challenge-box {
-    height: 664px;
+    height: auto;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     .create {
-      height: 293px;
+      height: auto;
       width: 100%;
       margin-top: 29px;
       display: flex;
@@ -116,13 +150,14 @@
         font-size: 24px;
       }
       .create-contents {
+        height: 220px;
         width: 80%;
         margin-top: 17px;
         font-size: 24px;
         .challenge-title-textarea {
           width: 100%;
           height: 37px;
-          margin-bottom: 27px;
+          margin-bottom: 15px;
           box-sizing: border-box;
           background-image: url("/images/line.png");
           background-position: bottom;
@@ -168,7 +203,7 @@
         }
       }
     }
-    .select-date {
+    .select-date-container {
       width: 80%;
       height: 293px;
       .select-date-text {
@@ -196,6 +231,19 @@
           text-align: center;
         }
       }
+      .select-date {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 28px;
+        .date-box {
+          width: 111px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+      }
     }
     .save-btn {
       width: 331px;
@@ -207,40 +255,6 @@
       align-items: center;
       margin-bottom: 19px;
       font-size: 24px;
-      color: #988461;
-    }
-  }
-
-  .bottom-nav {
-    width: 100%;
-    height: 64px;
-    margin-bottom: 25px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-top: 1px solid #ddcbac;
-    gap: 50px;
-    .menu-write,
-    .menu-calendar,
-    .menu-challenge {
-      width: 45px;
-      height: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .write-img,
-    .calendar-img,
-    .challenge-img {
-      width: 37px;
-      height: 35px;
-    }
-    .write-text,
-    .calendar-text,
-    .challenge-text {
-      font-size: 10px;
       color: #988461;
     }
   }

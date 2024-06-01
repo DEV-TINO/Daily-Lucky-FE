@@ -10,6 +10,7 @@ const store = createStore({
         day: "SUN",
       },
       posts: [], // saved Post data
+      challenges: [], //saved Challenge data
     };
   },
   mutations: {
@@ -45,6 +46,24 @@ const store = createStore({
             post.year === dateInfo.year
           )
       );
+    },
+    // add challenge List
+    addChallenge(state, challenge) {
+      state.challenges.push(challenge);
+    },
+    deleteChallenge(state, index) {
+      state.challenges.splice(index, 1);
+    },
+  },
+  actions: {
+    // create new challenge
+    createChallenge({ commit }, challenge) {
+      commit("addChallenge", challenge);
+    },
+  },
+  getters: {
+    getChallenges(state) {
+      return state.challenges;
     },
   },
 });
