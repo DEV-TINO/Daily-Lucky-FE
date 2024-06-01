@@ -8,7 +8,7 @@
         <div
           class="delete is-red"
           :class="isHidden ? 'is-hidden' : ''"
-          @click="handleDeletePost"
+          @click="handleClickDeletePost"
         >
           삭제하기
         </div>
@@ -87,14 +87,13 @@
         <div class="upload-button" @click="handleClickWriteDiary()">글쓰기</div>
       </div>
     </div>
+    <div style="width: 100%; min-height: 81px; height: 81px"></div>
 
     <!-- Bottom Nav -->
-    <BottomNav></BottomNav>
   </div>
 </template>
 
 <script>
-  import BottomNav from "@/components/BottomNav.vue";
   export default {
     name: "WritePage",
     data() {
@@ -130,9 +129,6 @@
         content: "", // 작성한 일기....
         post: {},
       };
-    },
-    components: {
-      BottomNav,
     },
     mounted() {
       this.post = this.$store.state.posts.filter((post, index) => {
@@ -177,7 +173,7 @@
         const uploadFiles = event.target.files;
         this.imageUrl = URL.createObjectURL(uploadFiles[0]);
       },
-      handleDeletePost() {
+      handleClickDeletePost() {
         if (this.post) {
           this.$store.commit("deletePost", {
             date: this.$store.state.calendarSelected.date,
@@ -205,8 +201,7 @@
   }
 
   .write-container {
-    min-height: 100vh;
-    height: auto;
+    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -349,10 +344,6 @@
       width: 80%;
       min-height: 110px;
       height: fit-content;
-      /* background-image: url("/images/upload-image.png"); */
-      /* background-size: contain; */
-      /* background-repeat: no-repeat; */
-
       border: #988461 dashed 2px;
       border-radius: 5px;
       display: flex;
@@ -360,6 +351,7 @@
       justify-content: center;
       align-items: center;
       margin-top: 17px;
+      padding-bottom: 10px;
       .img {
         width: 24px;
         height: 24px;
@@ -382,40 +374,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-  }
-
-  .bottom-nav {
-    width: 100%;
-    height: 64px;
-    margin-bottom: 25px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-top: 1px solid #ddcbac;
-    gap: 50px;
-    .menu-write,
-    .menu-calendar,
-    .menu-challenge {
-      width: 45px;
-      height: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .write-img,
-    .calendar-img,
-    .challenge-img {
-      width: 37px;
-      height: 35px;
-    }
-    .write-text,
-    .calendar-text,
-    .challenge-text {
-      font-size: 10px;
-      color: #988461;
     }
   }
 </style>

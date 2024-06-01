@@ -34,19 +34,20 @@
   };
 </script>
 
-<style lang="css" scoped>
+<style scoped>
   .bottom-nav {
     width: 100%;
-    min-height: 64px;
-    max-height: 64px;
-    height: 64px;
-    margin-bottom: 25px;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     border-top: 1px solid #ddcbac;
     gap: 50px;
+    background-color: #f8f6e9;
 
     .menu-write,
     .menu-calendar,
@@ -57,7 +58,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin-top: 5px;
     }
 
     .write-img,
