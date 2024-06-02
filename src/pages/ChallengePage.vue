@@ -13,13 +13,16 @@
       <div class="challenge-menu">
         <div class="challenge-text main-color">Challenge!</div>
       </div>
-      <div class="challenge-selected">
-        <div class="selected-title">없어져라 비듬비듬!</div>
+      <div class="challenge-selected" v-if="selectedChallenge">
+        <div class="selected-title">{{ selectedChallenge.title }}</div>
         <div class="selected-context">
-          이번주에 당신의 비듬은 안녕하신가요?<br />여태까지 목표한 4주 중 2일의
-          비듬을 없앴답니다! 앞으로도 노력하새요!
+          {{ selectedChallenge.content }}
         </div>
-        <div class="selected-date">2024.04.24-2024.05.12</div>
+        <div class="selected-date">{{ selectedChallenge.dueDate }}</div>
+      </div>
+      <div class="challenge-no-selected" v-else>
+        <img class="img" src="/images/lucky-sad.png" />
+        <div class="text main-color">아직 아무 챌린지도 없어요...</div>
       </div>
     </div>
 
@@ -52,7 +55,9 @@
                   {{ challenge.title }}
                 </div>
                 <div class="buttons">
-                  <div class="select-btn">선택하기</div>
+                  <div class="select-btn" @click="selectChallenge(challenge)">
+                    선택하기
+                  </div>
                   <div
                     class="delete-btn color-red"
                     @click="deleteChallenge(index)"
@@ -85,12 +90,30 @@
   import { mapGetters } from "vuex";
   export default {
     name: "ChallengePage",
+    data() {
+      return {
+        selectedChallenge: this.$store.state.selectedChallenge,
+      };
+    },
     methods: {
       handleClickMakeChallenge() {
         this.$router.push("/create-challenge");
       },
       deleteChallenge(index) {
+        const challengeToDelete = this.challenges[index];
         this.$store.commit("deleteChallenge", index);
+        if (
+          this.selectedChallenge &&
+          this.selectedChallenge === challengeToDelete
+        ) {
+          this.$store.commit("selectChallenge", null);
+          this.selectedChallenge = null;
+        }
+      },
+      selectChallenge(challenge) {
+        this.$store.commit("selectChallenge", challenge);
+        this.selectedChallenge = challenge;
+        console.log(challenge);
       },
     },
     computed: {
@@ -172,6 +195,24 @@
       .selected-date {
         font-size: 12px;
         text-align: right;
+      }
+    }
+    .challenge-no-selected {
+      min-height: 141px;
+      height: auto;
+      background-color: rgba(249, 233, 197, 0.35);
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 15px 43px;
+      .img {
+        width: 87px;
+        height: 72px;
+      }
+      .text {
+        font-size: 24px;
       }
     }
   }

@@ -11,6 +11,7 @@ const store = createStore({
       },
       posts: [], // saved Post data
       challenges: [], //saved Challenge data
+      selectedChallenge: null,
     };
   },
   mutations: {
@@ -53,6 +54,9 @@ const store = createStore({
     },
     deleteChallenge(state, index) {
       state.challenges.splice(index, 1);
+    },
+    selectChallenge(state, challenge) {
+      state.selectedChallenge = challenge;
     },
   },
   actions: {
