@@ -33,34 +33,36 @@
         <div class="start-date">
           <div class="start-text">Start from..</div>
           <div class="start-select main-color">
-            <div class="select-date">
-              <div class="date-box">
-                <div>MAY</div>
-                <div>2024</div>
-                <div>⌄</div>
-              </div>
-              <div class="date-box">
-                <div>24</div>
-                <div>Friday</div>
-                <div>⌄</div>
-              </div>
+            <div>
+              <select
+                class="select-date start"
+                v-model="startDate"
+                @change="onStartDateChange"
+              >
+                <option
+                  v-for="date in startDateOptions"
+                  :key="date"
+                  :value="date"
+                >
+                  {{ date }}
+                </option>
+              </select>
             </div>
           </div>
         </div>
         <div class="end-date">
           <div class="end-text">End to..</div>
           <div class="end-select main-color">
-            <div class="select-date">
-              <div class="date-box">
-                <div>MAY</div>
-                <div>2024</div>
-                <div>⌄</div>
-              </div>
-              <div class="date-box">
-                <div>24</div>
-                <div>Friday</div>
-                <div>⌄</div>
-              </div>
+            <div>
+              <select class="select-date end" v-model="endDate">
+                <option
+                  v-for="date in endDateOptions"
+                  :key="date"
+                  :value="date"
+                >
+                  {{ date }}
+                </option>
+              </select>
             </div>
           </div>
         </div>
@@ -79,18 +81,91 @@
       return {
         challengeTitle: "",
         challengeContents: "",
+        startDate: "",
+        endDate: "",
+        startDateOptions: [],
+        endDateOptions: [],
+        days: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
+        months: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ],
       };
     },
+    created() {
+      this.initDates();
+    },
+    // watch: {
+    //   startDate(newDate) {
+    //     this.setEndDateOptions(new Date(newDate));
+    //     this.endDate = this.endDateOptions[0];
+    //   },
+    // },
     methods: {
+      initDates() {
+        const today = new Date();
+        this.startDateOptions = this.generateFutureDateOptions(today, 30);
+        this.startDate = this.formatDate(today);
+        this.setEndDateOptions(today);
+        this.endDate = this.endDateOptions[0];
+      },
+      formatDate(date) {
+        return `${date.getFullYear()} ${
+          this.months[date.getMonth()]
+        } ${date.getDate()} ${this.days[date.getDay()]}`;
+      },
+
+      generateFutureDateOptions(baseDate, daysToAdd) {
+        const dateOptions = [];
+        for (let i = 0; i < daysToAdd; i++) {
+          const date = new Date(baseDate);
+          date.setDate(baseDate.getDate() + i);
+          const formattedDate = this.formatDate(date);
+          dateOptions.push(formattedDate);
+        }
+        return dateOptions;
+      },
+
+      setEndDateOptions(startDate) {
+        const startDateObj = new Date(startDate);
+        this.endDateOptions = this.generateFutureDateOptions(startDateObj, 30);
+      },
+
+      onStartDateChange(event) {
+        const selectedDate = event.target.value;
+        console.log("event.target.value : " + selectedDate);
+        const startDate = this.parseDate(selectedDate);
+        console.log("startDate : " + startDate);
+        this.setEndDateOptions(startDate);
+        console.log("endDateOptions : " + this.endDateOptions);
+        this.endDate = this.endDateOptions[0];
+        console.log("endDate : " + this.endDate);
+      },
+
+      parseDate(dateStr) {
+        const [year, month, date, day] = dateStr.split(" ");
+        const monthIndex = this.months.indexOf(month);
+        const dateIndex = parseInt(date);
+        return new Date(year, monthIndex, dateIndex);
+      },
+
       saveChallenge() {
         const newChallenge = {
           title: this.challengeTitle,
           content: this.challengeContents,
-          dueDate: "2024-12-14",
+          startDate: this.startDate,
+          dueDate: this.endDate,
         };
-        console.log(this.challengeTitle);
-        console.log(this.challengeContents);
-        console.log("Saving Challenge:", newChallenge);
         this.$store.dispatch("createChallenge", newChallenge);
         this.$router.push("/challenge");
       },
@@ -171,6 +246,7 @@
           border: none;
           overflow: clip;
           resize: none;
+          text-wrap: nowrap;
         }
         .challenge-title-textarea::placeholder {
           color: #ccc6ba;
@@ -206,13 +282,15 @@
     .select-date-container {
       width: 80%;
       height: 293px;
+      display: flex;
+      flex-direction: column;
       .select-date-text {
         font-size: 24px;
       }
       .start-date {
         .start-text {
           font-size: 20px;
-          margin: 18px 0px 21px 13px;
+          margin: 27px 0px 21px 13px;
           color: #ff8e8c;
         }
         .start-select {
@@ -223,7 +301,7 @@
       .end-date {
         .end-text {
           font-size: 20px;
-          margin: 41px 0px 21px 13px;
+          margin: 30px 0px 21px 13px;
           color: #ff8e8c;
         }
         .end-select {
@@ -232,17 +310,12 @@
         }
       }
       .select-date {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        width: 100%;
-        height: 28px;
-        .date-box {
-          width: 111px;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-        }
+        border: none;
+        background-color: #f8f6e9;
+        outline: none;
+        color: #958565;
+        font-size: 24px;
+        font-family: "custom-font";
       }
     }
     .save-btn {
