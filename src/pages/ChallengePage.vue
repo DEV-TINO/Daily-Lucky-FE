@@ -15,7 +15,7 @@
       </div>
       <div class="challenge-selected" v-if="selectedChallenge">
         <div class="selected-title">{{ selectedChallenge.title }}</div>
-        <div class="selected-context">
+        <div class="selected-content">
           {{ selectedChallenge.content }}
         </div>
         <div class="selected-date">{{ selectedChallenge.dueDate }}</div>
@@ -188,7 +188,7 @@
       .selected-title {
         font-size: 28px;
       }
-      .selected-context {
+      .selected-content {
         font-size: 14px;
         color: #78540a;
       }
