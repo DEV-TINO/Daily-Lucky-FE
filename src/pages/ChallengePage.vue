@@ -129,7 +129,8 @@
   .challenge-container {
     min-height: 100%;
     height: auto;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -160,10 +161,10 @@
   }
 
   .challenge {
-    width: 100%;
+    width: 393px;
+    max-width: 393px;
     min-height: 206px;
-    /* height: max-content; */
-    height: 100%;
+    height: fit-content;
 
     .challenge-menu {
       width: 100%;
@@ -179,6 +180,8 @@
       font-size: 40px;
       min-height: 141px;
       height: auto;
+      width: 393px;
+      max-width: 393px;
       background-color: rgba(249, 233, 197, 0.35);
       display: flex;
       flex-direction: column;
@@ -186,6 +189,10 @@
       gap: 13px;
       padding: 15px 43px;
       .selected-title {
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-wrap: nowrap;
         font-size: 28px;
       }
       .selected-content {
@@ -338,11 +345,7 @@
               overflow: hidden;
               height: 23px;
               -webkit-box-orient: vertical;
-
-              /* Text가 길이보다..,, ->길이가 정해져 있어야만 사용 가능해요.. */
-              /* text-overflow: ellipsis; */
-              /* overflow: hidden; */
-              /* text-wrap: nowrap; */
+              text-overflow: ellipsis;
             }
             .dueDate {
               padding-top: 8px;
