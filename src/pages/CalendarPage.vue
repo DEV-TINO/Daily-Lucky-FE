@@ -177,10 +177,17 @@
           date: new Date().getDate(),
         };
 
+        // Compare years first
+        if (calendarSelected.year > current.year) return true;
         if (calendarSelected.year < current.year) return false;
+
+        // If years are equal, compare months
+        if (calendarSelected.month > current.month) return true;
         if (calendarSelected.month < current.month) return false;
-        if (calendarSelected.date < current.date) return false;
-        return true;
+
+        // If months are equal, compare dates
+        if (calendarSelected.date > current.date) return true;
+        return false;
       },
 
       handleClickCalendarSelected(date, day) {
