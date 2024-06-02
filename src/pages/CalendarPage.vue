@@ -81,7 +81,14 @@
     <!-- Selected Challenge -->
     <div class="challenge-content">
       <div class="calendar-challenge sub-color">
-        <div class="challenge-box">
+        <div class="selected-box" v-if="selectedChallenge">
+          <div class="selected-title">{{ selectedChallenge.title }}</div>
+          <div class="selected-content">
+            {{ selectedChallenge.content }}
+          </div>
+          <div class="selected-dueDate">{{ selectedChallenge.dueDate }}</div>
+        </div>
+        <div class="challenge-box" v-else>
           <img class="calendar-challenge-image" src="/images/lucky-sad.png" />
           <div class="calendar-challenge-contents">
             아직 아무 챌린지도 없어요...
@@ -125,6 +132,8 @@
 
         // totalWeeks in Month
         totalWeeks: [],
+
+        selectedChallenge: this.$store.state.selectedChallenge,
       };
     },
 
@@ -474,6 +483,30 @@
       height: 120px;
       background-color: rgba(249, 233, 197, 0.35);
 
+      .selected-box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 120px;
+        padding-top: 15px;
+        padding-left: 20px;
+        box-sizing: border-box;
+        .selected-title {
+          font-size: 28px;
+        }
+        .selected-content {
+          font-size: 14px;
+          padding-top: 10px;
+          color: #78540a;
+        }
+        .selected-dueDate {
+          font-size: 12px;
+          align-self: flex-end;
+          margin-top: auto;
+          padding-right: 15px;
+          padding-bottom: 15px;
+        }
+      }
       .challenge-box {
         display: flex;
         flex-direction: row;
