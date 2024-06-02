@@ -208,7 +208,7 @@
     justify-content: space-between;
   }
   .delete {
-    position: fixed;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
