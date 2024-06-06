@@ -18,7 +18,9 @@
         <div class="selected-content">
           {{ selectedChallenge.content }}
         </div>
-        <div class="selected-date">{{ selectedChallenge.dueDate }}</div>
+        <div class="selected-date">
+          {{ selectedChallenge.startDate }} - {{ selectedChallenge.dueDate }}
+        </div>
       </div>
       <div class="challenge-no-selected" v-else>
         <img class="img" src="/images/lucky-sad.png" />
@@ -70,6 +72,7 @@
                 {{ challenge.content }}
               </div>
               <div class="dueDate">
+                {{ challenge.startDate }} -
                 {{ challenge.dueDate }}
               </div>
             </div>
@@ -180,8 +183,6 @@
       font-size: 40px;
       min-height: 141px;
       height: auto;
-      width: 393px;
-      max-width: 393px;
       background-color: rgba(249, 233, 197, 0.35);
       display: flex;
       flex-direction: column;

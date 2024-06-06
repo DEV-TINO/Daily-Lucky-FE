@@ -37,7 +37,7 @@
               <select
                 class="select-date start"
                 v-model="startDate"
-                @change="onStartDateChange"
+                @change="onStartDateChange($event)"
               >
                 <option
                   v-for="date in startDateOptions"
@@ -68,7 +68,7 @@
         </div>
       </div>
       <!-- Save Button -->
-      <div class="save-btn" @click="saveChallenge">저장하기!</div>
+      <div class="save-btn" @click="saveChallenge()">저장하기!</div>
     </div>
     <!-- Bottom Nav -->
   </div>
@@ -127,12 +127,20 @@
 
       generateFutureDateOptions(baseDate, daysToAdd) {
         const dateOptions = [];
-        for (let i = 0; i < daysToAdd; i++) {
-          const date = new Date(baseDate);
-          date.setDate(baseDate.getDate() + i);
-          const formattedDate = this.formatDate(date);
-          dateOptions.push(formattedDate);
-        }
+        Array(daysToAdd)
+          .fill(0)
+          .forEach((_, i) => {
+            const date = new Date(baseDate);
+            date.setDate(baseDate.getDate() + i);
+            dateOptions.push(this.formatDate(date));
+          });
+
+        // for (let i = 0; i < daysToAdd; i++) {
+        //   const date = new Date(baseDate);
+        //   date.setDate(baseDate.getDate() + i);
+        //   const formattedDate = this.formatDate(date);
+        //   dateOptions.push(formattedDate);
+        // }
         return dateOptions;
       },
 
@@ -143,13 +151,9 @@
 
       onStartDateChange(event) {
         const selectedDate = event.target.value;
-        console.log("event.target.value : " + selectedDate);
         const startDate = this.parseDate(selectedDate);
-        console.log("startDate : " + startDate);
         this.setEndDateOptions(startDate);
-        console.log("endDateOptions : " + this.endDateOptions);
         this.endDate = this.endDateOptions[0];
-        console.log("endDate : " + this.endDate);
       },
 
       parseDate(dateStr) {

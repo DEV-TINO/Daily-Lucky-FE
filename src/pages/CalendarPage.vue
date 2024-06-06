@@ -86,7 +86,9 @@
           <div class="selected-content">
             {{ selectedChallenge.content }}
           </div>
-          <div class="selected-dueDate">{{ selectedChallenge.dueDate }}</div>
+          <div class="selected-dueDate">
+            {{ selectedChallenge.startDate }} - {{ selectedChallenge.dueDate }}
+          </div>
         </div>
         <div class="challenge-box" v-else>
           <img class="calendar-challenge-image" src="/images/lucky-sad.png" />
