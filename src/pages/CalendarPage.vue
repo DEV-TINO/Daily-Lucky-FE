@@ -11,14 +11,14 @@
       <!-- Calendar Top -->
       <div class="calendar-month">
         <div class="month-before" @click="changeMonth(-1)">
-          {{ indicators[0] }}
+          {{ indicators.left }}
         </div>
         <div class="month-now">
           <div class="month">{{ months?.[currentMonth - 1] }}</div>
           <div class="year">{{ currentYear }}</div>
         </div>
         <div class="month-after" @click="changeMonth(1)">
-          {{ indicators[1] }}
+          {{ indicators.right }}
         </div>
       </div>
 
@@ -109,7 +109,7 @@
     name: "CalendarPage",
     data() {
       return {
-        indicators: ["<", ">"],
+        indicators: { left: "<", right: ">" },
         bottomMenu: ["write", "calendar", "challenge"],
         days: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
         months: [
