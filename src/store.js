@@ -12,6 +12,11 @@ const store = createStore({
       posts: [], // saved Post data
       challenges: [], //saved Challenge data
       selectedChallenge: null,
+      bottomMenu: {
+        write: "write",
+        calendar: "calendar",
+        challenge: "challenge",
+      },
     };
   },
   mutations: {

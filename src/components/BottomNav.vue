@@ -1,24 +1,23 @@
 <template>
   <!-- Bottom Nav -->
-  <div class="bottom-nav">
+  <div class="bottom-nav background-color">
     <div
-      v-for="(menu, index) in bottomMenu"
+      class="menu"
+      v-for="(value, key, index) in bottomMenu"
       :key="index"
-      :class="`menu-${menu}`"
-      @click="handleClickMenu(menu)"
+      @click="handleClickMenu(value)"
     >
-      <img :class="`${menu}-img`" :src="`/images/${menu}.png`" />
-      <div :class="`${menu}-text`">{{ menu }}</div>
+      <img class="image" :src="`/images/${value}.png`" />
+      <div class="text color-bottom-text">{{ value }}</div>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
-    data() {
-      return {
-        bottomMenu: ["write", "calendar", "challenge"],
-      };
+    computed: {
+      ...mapState(["bottomMenu"]),
     },
     methods: {
       handleClickMenu(menu) {
@@ -47,11 +46,8 @@
     align-items: center;
     border-top: 1px solid #ddcbac;
     gap: 50px;
-    background-color: #f8f6e9;
 
-    .menu-write,
-    .menu-calendar,
-    .menu-challenge {
+    .menu {
       width: 45px;
       height: 48px;
       display: flex;
@@ -60,18 +56,13 @@
       justify-content: center;
     }
 
-    .write-img,
-    .calendar-img,
-    .challenge-img {
+    .image {
       width: 37px;
       height: 35px;
     }
 
-    .write-text,
-    .calendar-text,
-    .challenge-text {
+    .text {
       font-size: 10px;
-      color: #988461;
     }
   }
 </style>
