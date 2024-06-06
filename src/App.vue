@@ -1,39 +1,25 @@
 <template>
-  <div class="screen">
+  <div class="screen background-color">
     <router-view></router-view>
-    <div
-      v-if="this.$route.name == 'Challenge'"
-      style="width: 100%; min-height: 81px; height: 81px"
-    ></div>
-    <BottomNav v-if="showBottomNav" :bottomMenu="bottomMenu"></BottomNav>
+    <div class="bottom background-color" v-if="isChallengePage()"></div>
+    <BottomNav v-if="showBottomNav"></BottomNav>
   </div>
 </template>
 
 <script>
   import BottomNav from "@/components/BottomNav.vue";
-
   export default {
     components: {
       BottomNav,
-    },
-    data() {
-      return {
-        bottomMenu: ["write", "calendar", "challenge"],
-      };
     },
     computed: {
       showBottomNav() {
         return this.$route.name !== "Splash";
       },
     },
-    beforeRouteEnter(to, from, next) {
-      next((vm) => {
-        console.log(to.name);
-      });
-    },
-    watch: {
-      $route(to, from) {
-        console.log(to.name);
+    methods: {
+      isChallengePage() {
+        return this.$route.name === "Challenge";
       },
     },
   };
@@ -49,15 +35,21 @@
     padding: 0;
     color: black;
     font-family: "custom-font";
-    background-color: #f8f6e9;
+    background-color: var(--background-color);
   }
   .screen {
     width: 100%;
     height: 100vh; /* Full viewport height */
-    /* height: auto; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+  .bottom {
+    width: 100%;
+    min-height: 81px;
+    height: 81px;
+  }
+  .background-color {
     background-color: #f8f6e9;
   }
   .main-color {
@@ -68,5 +60,8 @@
   }
   .color-red {
     color: #dd6262;
+  }
+  .color-bottom-text {
+    color: #988461;
   }
 </style>
