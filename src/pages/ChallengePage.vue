@@ -300,7 +300,6 @@
             flex-direction: column;
             width: 100%;
             height: 100px;
-            /* justify-content: center; */
             .title-box {
               width: 255px;
               padding-top: 18px;
@@ -311,7 +310,6 @@
               .title {
                 font-size: 20px;
                 max-width: 145px;
-                /* Text가 길이보다..,, ->길이가 정해져 있어야만 사용 가능해요.. */
                 text-overflow: ellipsis;
                 overflow: hidden;
                 text-wrap: nowrap;

@@ -19,7 +19,7 @@
 
 <style scoped>
   .splash-container {
-    height: 100vh; /* 내가 현재 보이는 화면 크기 전체 높이 */
+    height: 100vh; /* Full height of the current visible screen  */
     display: flex;
     flex-direction: column;
     justify-content: center;

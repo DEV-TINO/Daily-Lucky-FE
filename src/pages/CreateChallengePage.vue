@@ -105,12 +105,6 @@
     created() {
       this.initDates();
     },
-    // watch: {
-    //   startDate(newDate) {
-    //     this.setEndDateOptions(new Date(newDate));
-    //     this.endDate = this.endDateOptions[0];
-    //   },
-    // },
     methods: {
       initDates() {
         const today = new Date();

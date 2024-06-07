@@ -126,7 +126,7 @@
         emojiType: "lucky", // == emojiType
         bottomMenu: ["write", "calendar", "challenge"],
         imageUrl: "",
-        content: "", // 작성한 일기....
+        content: "",
         post: {},
       };
     },
@@ -157,9 +157,6 @@
         } else {
           this.$store.commit("updatePost", post);
         }
-
-        // 1. TODO: Save Diary according to API Docs..
-        // 2. TODO: Send to Server
 
         // Move to Calendar Page
         this.$router.push("/calendar");
@@ -210,7 +207,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* top, right, bottom, left */
     top: 25px;
     right: 0px;
     height: 35px;
@@ -235,7 +231,6 @@
 
   .today-moods {
     width: 100%;
-    /* background-color: #dfebf8; */
     .moods-text {
       height: 40px;
       display: flex;
@@ -282,7 +277,6 @@
       }
     }
     .moods-emoji-text {
-      /* background-color: #f0d5d4; */
       width: 100%;
       height: 15px;
       font-size: 10px;
@@ -299,7 +293,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: #e6f8df; */
     .writing-date {
       width: 100%;
       height: 50px;
