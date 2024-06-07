@@ -140,9 +140,7 @@
     },
 
     methods: {
-      // 캘린더의 월, 일, 년, 달을 가지고 -> post를 가져와야함..
-      // 만약에 포스트가 있으면 가져와서 이모지가 보여지는데...
-      // 만약에 포스트가 없으면..? 이모지가 안보이겠죠!!
+      // Check if post exists
       checkPostExist(date, day) {
         const check = this.$store.state.posts.filter((post, index) => {
           return (
@@ -160,6 +158,7 @@
         }
       },
 
+      // Get post emoji
       getPostEmoji(date, day) {
         const emoji = this.$store.state.posts.filter((post, index) => {
           return (
@@ -172,6 +171,15 @@
         return `/images/lucky-${emoji}.png`;
       },
 
+      //
+      getDayStyle(date, day) {
+        if (checkPostExist(date, day)) {
+          return {
+            backgroundImage: `url(${getPostEmoji(date, day)})`,
+          };
+        }
+        return {};
+      },
       isFuture(calendarSelected) {
         const current = {
           year: new Date().getFullYear(),
@@ -202,7 +210,6 @@
           date: date,
           day: day,
         };
-        console.log(calendarSelected);
 
         if (this.isFuture(calendarSelected)) {
           alert("미래에 대한 일기는 쓸 수 없습니다... 바보..");
