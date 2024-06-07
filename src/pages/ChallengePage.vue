@@ -116,7 +116,6 @@
       selectChallenge(challenge) {
         this.$store.commit("selectChallenge", challenge);
         this.selectedChallenge = challenge;
-        console.log(challenge);
       },
     },
     computed: {

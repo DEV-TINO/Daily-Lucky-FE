@@ -139,7 +139,6 @@
         );
       })[0];
       if (this.post) {
-        console.log(this.post);
         this.content = this.post.content;
         this.emojiType = this.post.emoji;
         this.imageUrl = this.post.imageUrl;
@@ -153,7 +152,6 @@
           content: this.content,
           imageUrl: this.imageUrl,
         };
-        console.log(post);
         if (!this.post) {
           this.$store.commit("addPost", post);
         } else {
