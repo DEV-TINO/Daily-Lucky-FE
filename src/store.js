@@ -66,11 +66,6 @@ const store = createStore({
       commit("addChallenge", challenge);
     },
   },
-  getters: {
-    getChallenges(state) {
-      return state.challenges;
-    },
-  },
 });
 
 export default store;

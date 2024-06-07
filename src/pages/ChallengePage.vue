@@ -119,9 +119,8 @@
       },
     },
     computed: {
-      ...mapGetters(["getChallenges"]),
       challenges() {
-        return this.getChallenges || [];
+        return this.$store.state.challenges;
       },
     },
   };
