@@ -15,6 +15,7 @@
         </div>
         <div class="current">
           <div class="month">{{ months?.[currentMonth - 1] }}</div>
+          <!-- <div class="month">{{ getMonthName }}</div> -->
           <div class="year">{{ currentYear }}</div>
         </div>
         <div class="after" @click="changeMonth(1)">
@@ -94,7 +95,7 @@
         </div>
       </div>
     </div>
-    <div class="bottom-container"></div>
+    <!-- <div class="bottom-container"></div> -->
 
     <!-- Bottom Nav -->
   </div>
@@ -319,11 +320,9 @@
   }
   .calendar-content {
     width: 100%;
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 30px;
   }
   .logo {
     margin-top: 51px;
@@ -484,22 +483,23 @@
 
   .selected-challenge {
     width: 100%;
-    height: 120px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    padding-bottom: 80px;
 
     .challenge-container {
       width: 100%;
-      height: 120px;
+      height: 100%;
       background-color: rgba(249, 233, 197, 0.35);
 
       .exist {
         display: flex;
         flex-direction: column;
         width: 100%;
-        height: 120px;
+        height: 100%;
         padding-top: 15px;
         padding-left: 20px;
         box-sizing: border-box;
@@ -525,7 +525,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 120px;
+        height: 100%;
       }
 
       .emoji {
