@@ -12,7 +12,7 @@
         >
           삭제하기
         </div>
-        <div class="logo" @click="isHidden = !isHidden">
+        <div class="logo">
           <img class="emoji" src="/images/lucky-lucky.png" />
           <div class="title main-color">Daily Lucky</div>
         </div>
@@ -142,6 +142,8 @@
         this.content = this.post.content;
         this.emojiType = this.post.emoji;
         this.imageUrl = this.post.imageUrl;
+      } else {
+        this.isHidden = true;
       }
     },
     methods: {
