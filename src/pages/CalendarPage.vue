@@ -14,8 +14,7 @@
           {{ indicators.left }}
         </div>
         <div class="current">
-          <div class="month">{{ months?.[currentMonth - 1] }}</div>
-          <!-- <div class="month">{{ getMonthName }}</div> -->
+          <div class="month">{{ getCurrentMonth }}</div>
           <div class="year">{{ currentYear }}</div>
         </div>
         <div class="after" @click="changeMonth(1)">
@@ -296,6 +295,10 @@
           });
 
         return weeks;
+      },
+
+      getCurrentMonth() {
+        return this.months[this.currentMonth - 1];
       },
     },
 
