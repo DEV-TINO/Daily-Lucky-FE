@@ -14,7 +14,7 @@
           {{ indicators.left }}
         </div>
         <div class="current">
-          <div class="month">{{ getCurrentMonth }}</div>
+          <div class="month">{{ getCurrentMonth(currentMonth) }}</div>
           <div class="year">{{ currentYear }}</div>
         </div>
         <div class="after" @click="changeMonth(1)">
