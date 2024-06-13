@@ -1,8 +1,8 @@
 <template>
   <div class="splash-container" @click="goToCalendar">
-    <div class="main-color splash-title">Daily Lucky</div>
-    <img class="splash-image" src="/images/lucky-lucky.png" />
-    <div class="sub-color splash-subtitle">Touch to Start</div>
+    <div class="main-color title">Daily Lucky</div>
+    <img class="image" src="/images/lucky-lucky.png" />
+    <div class="sub-color subtitle">Touch to Start</div>
   </div>
 </template>
 
@@ -26,18 +26,18 @@
     align-items: center;
   }
 
-  .splash-image {
+  .image {
     width: 175px;
     height: 161px;
     margin-top: 25px;
   }
 
-  .splash-title {
+  .title {
     margin-top: 100px;
     font-size: 60px;
   }
 
-  .splash-subtitle {
+  .subtitle {
     font-size: 20px;
     margin-top: 178px;
   }

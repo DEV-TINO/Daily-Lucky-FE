@@ -4,34 +4,34 @@
     <div class="calendar-content">
       <!-- Top Nav -->
       <div class="logo">
-        <img class="logo-emoji" src="/images/lucky-lucky.png" />
+        <img class="image" src="/images/lucky-lucky.png" />
         <div class="title main-color">Daily Lucky</div>
       </div>
 
       <!-- Calendar Top -->
       <div class="calendar-month">
-        <div class="month-before" @click="changeMonth(-1)">
+        <div class="before" @click="changeMonth(-1)">
           {{ indicators.left }}
         </div>
-        <div class="month-now">
+        <div class="current">
           <div class="month">{{ months?.[currentMonth - 1] }}</div>
           <div class="year">{{ currentYear }}</div>
         </div>
-        <div class="month-after" @click="changeMonth(1)">
+        <div class="after" @click="changeMonth(1)">
           {{ indicators.right }}
         </div>
       </div>
 
       <!-- Calendar date -->
-      <div class="calendar">
-        <!-- Indecaites -->
+      <div class="calendar-date">
+        <!-- Indecates day -->
         <div class="days">
-          <div class="calendar-day" v-for="(day, index) in days" :key="index">
+          <div class="day" v-for="(day, index) in days" :key="index">
             {{ day }}
           </div>
         </div>
 
-        <!-- Days -->
+        <!-- Date -->
         <div
           class="weeks"
           v-for="(week, weekIndex) in totalWeeks"
@@ -39,66 +39,62 @@
         >
           <div
             class="dates"
-            v-for="(day, index) in week"
+            v-for="(date, index) in week"
             :key="index"
-            @click="
-              handleClickCalendarSelected(
-                day, // dates...
-                days[index]
-              )
-            "
+            @click="handleClickCalendarSelected(date, days[index])"
           >
-            <!-- Default day -->
-            <div class="date-base" v-if="!isToday(day) && day != 0">
-              <div>{{ day }}</div>
+            <!-- Default date -->
+            <div class="base" v-if="!isToday(date) && date != 0">
+              <div>{{ date }}</div>
             </div>
 
-            <!-- Today day -->
-            <div class="date-today-radius" v-if="isToday(day)">
-              <div class="radius-today">{{ day }}</div>
+            <!-- Today date -->
+            <div class="radius" v-if="isToday(date)">
+              <div class="today">{{ date }}</div>
             </div>
 
             <!-- Emoji Icon -->
             <div
-              class="date-emoji"
-              v-if="day != 0"
+              class="emoji"
+              v-if="date != 0"
               :style="
-                checkPostExist(day, days[index])
+                checkPostExist(date, days[index])
                   ? {
-                      backgroundImage: `url(${getPostEmoji(day, days[index])})`,
+                      backgroundImage: `url(${getPostEmoji(
+                        date,
+                        days[index]
+                      )})`,
                     }
                   : {}
               "
             ></div>
 
             <!-- today bar -->
-            <div v-if="isToday(day)" class="date-today-bar"></div>
+            <div v-if="isToday(date)" class="underbar"></div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Selected Challenge -->
-    <div class="challenge-content">
-      <div class="calendar-challenge sub-color">
-        <div class="selected-box" v-if="selectedChallenge">
-          <div class="selected-title">{{ selectedChallenge.title }}</div>
-          <div class="selected-content">
+    <div class="selected-challenge">
+      <div class="challenge-container sub-color">
+        <div class="exist" v-if="selectedChallenge">
+          <div class="title">{{ selectedChallenge.title }}</div>
+          <div class="content">
             {{ selectedChallenge.content }}
           </div>
-          <div class="selected-dueDate">
+          <div class="dueDate">
             {{ selectedChallenge.startDate }} - {{ selectedChallenge.dueDate }}
           </div>
         </div>
-        <div class="challenge-box" v-else>
-          <img class="calendar-challenge-image" src="/images/lucky-sad.png" />
-          <div class="calendar-challenge-contents">
-            아직 아무 챌린지도 없어요...
-          </div>
+        <div class="no-exist" v-else>
+          <img class="emoji" src="/images/lucky-sad.png" />
+          <div class="content">아직 아무 챌린지도 없어요...</div>
         </div>
       </div>
     </div>
-    <div style="width: 100%; min-height: 81px; height: 81px"></div>
+    <div class="bottom-container"></div>
 
     <!-- Bottom Nav -->
   </div>
@@ -336,7 +332,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    .logo-emoji {
+    .image {
       width: 35px;
       height: 31px;
       margin-bottom: 5px;
@@ -355,8 +351,8 @@
     color: #958565;
     font-size: 32px;
 
-    .month-before,
-    .month-after {
+    .before,
+    .after {
       padding-left: 20px;
       padding-right: 20px;
       width: 50px;
@@ -364,7 +360,7 @@
       justify-content: center;
     }
 
-    .month-now {
+    .current {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -392,7 +388,7 @@
     gap: 15px;
   }
 
-  .calendar-day {
+  .day {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -404,12 +400,12 @@
     border-bottom: 2px solid #958565;
   }
 
-  .calendar-day:first-child {
+  .day:first-child {
     color: #dd6262;
     border-bottom: 2px solid #dd6262;
   }
 
-  .calendar-day:last-child {
+  .day:last-child {
     color: #737fe9;
     border-bottom: 2px solid #737fe9;
   }
@@ -432,23 +428,23 @@
       align-items: center;
       position: relative;
 
-      .date-base {
+      .base {
         width: 100%;
         height: 16px;
         display: flex;
         flex-direction: column;
         align-items: center;
 
-        .date-base-sun {
+        .base-sun {
           color: #dd6262;
         }
 
-        .date-base-sat {
+        .base-sat {
           color: #737fe9;
         }
       }
 
-      .date-emoji {
+      .emoji {
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
@@ -459,7 +455,7 @@
         align-items: center;
       }
 
-      .date-today-radius {
+      .radius {
         width: 16px;
         height: 16px;
         display: flex;
@@ -469,13 +465,13 @@
         color: #ffffff;
         background-color: rgba(149, 133, 101, 0.45);
 
-        .radius-today {
+        .today {
           margin-bottom: 2px;
           margin-left: 1px;
         }
       }
 
-      .date-today-bar {
+      .underbar {
         width: 35px;
         height: 4px;
         border-radius: 5px;
@@ -486,7 +482,7 @@
     }
   }
 
-  .challenge-content {
+  .selected-challenge {
     width: 100%;
     height: 120px;
     display: flex;
@@ -494,12 +490,12 @@
     align-items: center;
     justify-content: flex-start;
 
-    .calendar-challenge {
+    .challenge-container {
       width: 100%;
       height: 120px;
       background-color: rgba(249, 233, 197, 0.35);
 
-      .selected-box {
+      .exist {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -507,15 +503,15 @@
         padding-top: 15px;
         padding-left: 20px;
         box-sizing: border-box;
-        .selected-title {
+        .title {
           font-size: 28px;
         }
-        .selected-content {
+        .content {
           font-size: 14px;
           padding-top: 10px;
           color: #78540a;
         }
-        .selected-dueDate {
+        .dueDate {
           font-size: 12px;
           align-self: flex-end;
           margin-top: auto;
@@ -523,7 +519,7 @@
           padding-bottom: 15px;
         }
       }
-      .challenge-box {
+      .no-exist {
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -532,16 +528,21 @@
         height: 120px;
       }
 
-      .calendar-challenge-image {
+      .emoji {
         width: 87px;
         height: 72px;
         margin-right: 28px;
       }
 
-      .calendar-challenge-contents {
+      .content {
         font-size: 24px;
         color: #958565;
       }
+    }
+    .bottom-container {
+      width: 100%;
+      min-height: 81px;
+      height: 81px;
     }
   }
 </style>

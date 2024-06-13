@@ -3,49 +3,47 @@
     <!-- top Nav -->
     <div class="top">
       <div class="logo">
-        <img class="logo-emoji" src="/images/lucky-lucky.png" />
+        <img class="emoji" src="/images/lucky-lucky.png" />
         <div class="title">Daily Lucky</div>
       </div>
     </div>
 
     <!-- Selected Challenge -->
     <div class="challenge">
-      <div class="challenge-menu">
-        <div class="challenge-text main-color">Challenge!</div>
+      <div class="menu">
+        <div class="text main-color">Challenge!</div>
       </div>
-      <div class="challenge-selected" v-if="selectedChallenge">
-        <div class="selected-title">{{ selectedChallenge.title }}</div>
-        <div class="selected-content">
+      <div class="selected-challenge" v-if="selectedChallenge">
+        <div class="title">{{ selectedChallenge.title }}</div>
+        <div class="content">
           {{ selectedChallenge.content }}
         </div>
-        <div class="selected-date">
+        <div class="date">
           {{ selectedChallenge.startDate }} - {{ selectedChallenge.dueDate }}
         </div>
       </div>
-      <div class="challenge-no-selected" v-else>
-        <img class="img" src="/images/lucky-sad.png" />
+      <div class="no-selected-challenge" v-else>
+        <img class="image" src="/images/lucky-sad.png" />
         <div class="text main-color">아직 아무 챌린지도 없어요...</div>
       </div>
     </div>
 
     <!-- Challenge List -->
     <div class="challenge-list">
-      <div class="list-text main-color">List</div>
-      <div class="list-box-empty" v-if="challenges.length === 0">
-        <div class="no-list">
-          <!-- if Challenge List is empty -->
-          <img class="no-list-img" src="/images/lucky-sad.png" />
-          <div class="no-list-context main-color">
-            아직 아무 챌린지도 없어요...
-          </div>
+      <div class="text main-color">List</div>
+      <!-- if Challenge List is empty -->
+      <div class="no-exist" v-if="challenges.length === 0">
+        <div class="box">
+          <img class="image" src="/images/lucky-sad.png" />
+          <div class="text main-color">아직 아무 챌린지도 없어요...</div>
         </div>
       </div>
 
       <!-- if Challenge exists in the Challenge List -->
-      <div class="list-box-exist" v-else>
-        <div class="exist-list">
+      <div class="exist" v-else>
+        <div class="box">
           <div
-            class="challenge-box"
+            class="list"
             v-for="(challenge, index) in challenges"
             :key="index"
             :class="index % 2 ? 'even-challenge' : 'odd-challenge'"
@@ -149,7 +147,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      .logo-emoji {
+      .emoji {
         width: 35px;
         height: 31px;
         margin-bottom: 5px;
@@ -167,17 +165,17 @@
     min-height: 206px;
     height: fit-content;
 
-    .challenge-menu {
+    .menu {
       width: 100%;
       height: 65px;
 
-      .challenge-text {
+      .text {
         font-size: 24px;
         padding-left: 26px;
         padding-top: 27px;
       }
     }
-    .challenge-selected {
+    .selected-challenge {
       font-size: 40px;
       min-height: 141px;
       height: auto;
@@ -187,23 +185,23 @@
       justify-content: center;
       gap: 13px;
       padding: 15px 43px;
-      .selected-title {
+      .title {
         width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;
         text-wrap: nowrap;
         font-size: 28px;
       }
-      .selected-content {
+      .content {
         font-size: 14px;
         color: #78540a;
       }
-      .selected-date {
+      .date {
         font-size: 12px;
         text-align: right;
       }
     }
-    .challenge-no-selected {
+    .no-selected-challenge {
       min-height: 141px;
       height: auto;
       background-color: rgba(249, 233, 197, 0.35);
@@ -213,7 +211,7 @@
       align-items: center;
       gap: 20px;
       padding: 15px 43px;
-      .img {
+      .image {
         width: 87px;
         height: 72px;
       }
@@ -230,14 +228,14 @@
     align-items: center;
     gap: 23px;
     padding: 20px;
-    .list-text {
+    .text {
       width: 100%;
       text-align: left;
       padding-left: 29px;
       font-size: 24px;
     }
 
-    .list-box-empty {
+    .no-exist {
       width: 331px;
       height: 369px;
       border: 1px solid #958565;
@@ -247,22 +245,22 @@
       justify-content: center;
       align-items: center;
 
-      .no-list {
+      .box {
         gap: 30px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        .no-list-img {
+        .image {
           width: 132px;
           height: 109px;
         }
-        .no-list-context {
+        .text {
           font-size: 24px;
         }
       }
     }
-    .list-box-exist {
+    .exist {
       width: 331px;
       height: 600px;
       border: 1px solid #958565;
@@ -272,7 +270,7 @@
       justify-content: flex-start;
       align-items: center;
       overflow-y: auto;
-      .exist-list {
+      .box {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -282,7 +280,7 @@
         .even-challenge {
           background-color: rgba(255, 255, 255, 0.35);
         }
-        .challenge-box {
+        .list {
           width: 100%;
           height: 100px;
           display: flex;

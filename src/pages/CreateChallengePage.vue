@@ -3,36 +3,36 @@
     <!-- Top Nav -->
     <div class="top">
       <div class="logo">
-        <img class="logo-emoji" src="/images/lucky-lucky.png" />
+        <img class="emoji" src="/images/lucky-lucky.png" />
         <div class="title main-color">Daily Lucky</div>
       </div>
     </div>
 
     <div class="create-challenge-box">
       <!-- Create Challenge -->
-      <div class="create">
-        <div class="create-title main-color">Create Challenge!</div>
-        <div class="create-contents">
-          <div class="challenge-title main-color">Title</div>
+      <div class="container">
+        <div class="header main-color">Create Challenge!</div>
+        <div class="contents">
+          <div class="title main-color">Title</div>
           <textarea
             v-model="challengeTitle"
-            class="challenge-title-textarea main-color"
+            class="title-textarea main-color"
             placeholder="Write challenge title"
           ></textarea>
-          <div class="challenge-contents main-color">Contents</div>
+          <div class="content main-color">Contents</div>
           <textarea
             v-model="challengeContents"
-            class="challenge-contents-textarea main-color"
+            class="content-textarea main-color"
             placeholder="Write challenge contents"
           ></textarea>
         </div>
       </div>
       <!-- Select Date -->
       <div class="select-date-container">
-        <div class="select-date-text main-color">Due to</div>
+        <div class="header main-color">Due to</div>
         <div class="start-date">
-          <div class="start-text">Start from..</div>
-          <div class="start-select main-color">
+          <div class="text">Start from..</div>
+          <div class="start-select-box main-color">
             <div>
               <select
                 class="select-date start"
@@ -51,8 +51,8 @@
           </div>
         </div>
         <div class="end-date">
-          <div class="end-text">End to..</div>
-          <div class="end-select main-color">
+          <div class="text">End to..</div>
+          <div class="end-select-box main-color">
             <div>
               <select class="select-date end" v-model="endDate">
                 <option
@@ -191,7 +191,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      .logo-emoji {
+      .emoji {
         width: 35px;
         height: 31px;
         margin-bottom: 5px;
@@ -208,26 +208,26 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    .create {
+    .container {
       height: auto;
       width: 100%;
       margin-top: 29px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      .create-title {
+      .header {
         height: 30px;
         width: 333px;
         display: flex;
         justify-content: flex-start;
         font-size: 24px;
       }
-      .create-contents {
+      .contents {
         height: 220px;
         width: 80%;
         margin-top: 17px;
         font-size: 24px;
-        .challenge-title-textarea {
+        .title-textarea {
           width: 100%;
           height: 37px;
           margin-bottom: 15px;
@@ -246,13 +246,13 @@
           resize: none;
           text-wrap: nowrap;
         }
-        .challenge-title-textarea::placeholder {
+        .title-textarea::placeholder {
           color: #ccc6ba;
         }
-        .challenge-title-textarea:focus {
+        .title-textarea:focus {
           outline: none;
         }
-        .challenge-contents-textarea {
+        .content-textarea {
           width: 100%;
           height: 80px;
           box-sizing: border-box;
@@ -269,10 +269,10 @@
           overflow: clip;
           resize: none;
         }
-        .challenge-contents-textarea::placeholder {
+        .content-textarea::placeholder {
           color: #ccc6ba;
         }
-        .challenge-contents-textarea:focus {
+        .content-textarea:focus {
           outline: none;
         }
       }
@@ -282,27 +282,27 @@
       height: 293px;
       display: flex;
       flex-direction: column;
-      .select-date-text {
+      .header {
         font-size: 24px;
       }
       .start-date {
-        .start-text {
+        .text {
           font-size: 20px;
           margin: 27px 0px 21px 13px;
           color: #ff8e8c;
         }
-        .start-select {
+        .start-select-box {
           font-size: 24px;
           text-align: center;
         }
       }
       .end-date {
-        .end-text {
+        .text {
           font-size: 20px;
           margin: 30px 0px 21px 13px;
           color: #ff8e8c;
         }
-        .end-select {
+        .end-select-box {
           font-size: 24px;
           text-align: center;
         }
