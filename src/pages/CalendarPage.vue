@@ -57,16 +57,7 @@
             <div
               class="emoji"
               v-if="date != 0"
-              :style="
-                checkPostExist(date, days[index])
-                  ? {
-                      backgroundImage: `url(${getPostEmoji(
-                        date,
-                        days[index]
-                      )})`,
-                    }
-                  : {}
-              "
+              :style="getEmojiStyle(date, days[index])"
             ></div>
 
             <!-- today bar -->
@@ -299,6 +290,15 @@
 
       getCurrentMonth() {
         return this.months[this.currentMonth - 1];
+      },
+
+      getEmojiStyle(date, day) {
+        if (this.checkPostExist(date, day)) {
+          return {
+            backgroundImage: `url(${this.getPostEmoji(date, day)})`,
+          };
+        }
+        return {};
       },
     },
 
