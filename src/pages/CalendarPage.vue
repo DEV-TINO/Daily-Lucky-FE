@@ -44,19 +44,19 @@
             @click="handleClickCalendarSelected(date, days[index])"
           >
             <!-- Default date -->
-            <div class="base" v-if="!isToday(date) && date != 0">
+            <div v-if="!isToday(date) && date != 0" class="base">
               <div>{{ date }}</div>
             </div>
 
             <!-- Today date -->
-            <div class="radius" v-if="isToday(date)">
+            <div v-if="isToday(date)" class="radius">
               <div class="today">{{ date }}</div>
             </div>
 
             <!-- Emoji Icon -->
             <div
-              class="emoji"
               v-if="date != 0"
+              class="emoji"
               :style="getEmojiStyle(date, days[index])"
             ></div>
 
@@ -70,7 +70,7 @@
     <!-- Selected Challenge -->
     <div class="selected-challenge">
       <div class="challenge-container sub-color">
-        <div class="exist" v-if="selectedChallenge">
+        <div v-if="selectedChallenge" class="exist">
           <div class="title">{{ selectedChallenge.title }}</div>
           <div class="content">
             {{ selectedChallenge.content }}
@@ -79,7 +79,7 @@
             {{ selectedChallenge.startDate }} - {{ selectedChallenge.dueDate }}
           </div>
         </div>
-        <div class="no-exist" v-else>
+        <div class="no-exist" v-if="!selectedChallenge">
           <img class="emoji" src="/images/lucky-sad.png" />
           <div class="content">아직 아무 챌린지도 없어요...</div>
         </div>
@@ -138,11 +138,7 @@
           );
         });
 
-        if (check.length > 0) {
-          return true;
-        } else {
-          return false;
-        }
+        return check.length > 0;
       },
 
       // Get post emoji
