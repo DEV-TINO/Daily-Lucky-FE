@@ -27,7 +27,7 @@
         <div class="moods-emojis">
           <div
             class="emoji"
-            :class="emojiType === emoji ? '' : 'is-gray'"
+            :class="emojiSelected(emoji)"
             v-for="(emoji, index) in emojis"
             :key="index"
             @click="emojiType = emoji"
@@ -179,6 +179,9 @@
           });
         }
         this.$router.push("/calendar");
+      },
+      emojiSelected(emoji) {
+        return this.emojiType === emoji ? "" : "is-gray";
       },
     },
   };
