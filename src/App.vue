@@ -49,6 +49,15 @@
     min-height: 81px;
     height: 81px;
   }
+  .is-hidden {
+    visibility: hidden;
+  }
+  .is-gray {
+    filter: grayscale(1);
+  }
+  .is-red {
+    color: #ff7a78;
+  }
   .background-color {
     background-color: #f8f6e9;
   }

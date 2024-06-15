@@ -7,7 +7,7 @@
       <div class="top">
         <div
           class="delete is-red"
-          :class="isHidden ? 'is-hidden' : ''"
+          :class="toggleIsHidden()"
           @click="handleClickDeletePost()"
         >
           삭제하기
@@ -165,6 +165,9 @@
         // Move to Calendar Page
         this.$router.push("/calendar");
       },
+      toggleIsHidden() {
+        return this.isHidden ? "is-hidden" : "";
+      },
       handleClickUploadImage() {
         this.$refs.upload.click();
       },
@@ -190,18 +193,6 @@
 </script>
 
 <style scoped>
-  .is-hidden {
-    visibility: hidden;
-  }
-
-  .is-red {
-    color: #ff7a78;
-  }
-
-  .is-gray {
-    filter: grayscale(1);
-  }
-
   .write-container {
     height: 100vh;
     width: 100%;
