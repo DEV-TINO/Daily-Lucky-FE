@@ -95,13 +95,9 @@
 
 <script>
   import { mapGetters } from "vuex";
+  import { mapState } from "vuex";
   export default {
     name: "ChallengePage",
-    data() {
-      return {
-        selectedChallenge: this.$store.state.selectedChallenge,
-      };
-    },
     methods: {
       handleClickMakeChallenge() {
         this.$router.push("/create-challenge");
@@ -126,9 +122,7 @@
       },
     },
     computed: {
-      challenges() {
-        return this.$store.state.challenges;
-      },
+      ...mapState(["selectedChallenge", "challenges"]),
     },
   };
 </script>
