@@ -8,7 +8,7 @@
       @click="handleClickMenu(value)"
     >
       <img class="image" :src="`/images/${value}.png`" />
-      <div class="text color-bottom-text">{{ value }}</div>
+      <div class="text color-text">{{ value }}</div>
     </div>
   </div>
 </template>

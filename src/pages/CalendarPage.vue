@@ -9,7 +9,7 @@
       </div>
 
       <!-- Calendar Top -->
-      <div class="calendar-month">
+      <div class="calendar-month main-color">
         <div class="before" @click="handleClickChangeMonth(-1)">
           {{ indicators.left }}
         </div>
@@ -26,7 +26,7 @@
       <div class="calendar-date">
         <!-- Indecates day -->
         <div class="days">
-          <div class="day" v-for="(day, index) in days" :key="index">
+          <div class="day main-color" v-for="(day, index) in days" :key="index">
             {{ day }}
           </div>
         </div>
@@ -49,7 +49,7 @@
             </div>
 
             <!-- Today date -->
-            <div v-if="isToday(date)" class="radius">
+            <div v-if="isToday(date)" class="radius color-white">
               <div class="today">{{ date }}</div>
             </div>
 
@@ -72,7 +72,7 @@
       <div class="challenge-container sub-color">
         <div v-if="selectedChallenge" class="exist">
           <div class="title">{{ selectedChallenge.title }}</div>
-          <div class="content">
+          <div class="content color-content">
             {{ selectedChallenge.content }}
           </div>
           <div class="dueDate">
@@ -81,7 +81,7 @@
         </div>
         <div class="no-exist" v-if="!selectedChallenge">
           <img class="emoji" src="/images/lucky-sad.png" />
-          <div class="content">아직 아무 챌린지도 없어요...</div>
+          <div class="content main-color">아직 아무 챌린지도 없어요...</div>
         </div>
       </div>
     </div>
@@ -346,7 +346,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    color: #958565;
     font-size: 32px;
 
     .before,
@@ -393,7 +392,6 @@
     align-items: center;
     width: 30px;
     height: 30px;
-    color: #958565;
     font-size: 18px;
     border-bottom: 2px solid #958565;
   }
@@ -432,14 +430,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        .base-sun {
-          color: #dd6262;
-        }
-
-        .base-sat {
-          color: #737fe9;
-        }
       }
 
       .emoji {
@@ -460,7 +450,6 @@
         justify-content: center;
         align-items: flex-end;
         border-radius: 50%;
-        color: #ffffff;
         background-color: rgba(149, 133, 101, 0.45);
 
         .today {
@@ -508,7 +497,6 @@
         .content {
           font-size: 14px;
           padding-top: 10px;
-          color: #78540a;
         }
         .dueDate {
           font-size: 12px;
@@ -535,7 +523,6 @@
 
       .content {
         font-size: 24px;
-        color: #958565;
       }
     }
     .bottom-container {

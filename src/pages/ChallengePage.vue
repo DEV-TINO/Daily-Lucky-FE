@@ -4,7 +4,7 @@
     <div class="top">
       <div class="logo">
         <img class="emoji" src="/images/lucky-lucky.png" />
-        <div class="title">Daily Lucky</div>
+        <div class="title main-color">Daily Lucky</div>
       </div>
     </div>
 
@@ -15,7 +15,7 @@
       </div>
       <div class="selected-challenge" v-if="selectedChallenge">
         <div class="title">{{ selectedChallenge.title }}</div>
-        <div class="content">
+        <div class="content color-content">
           {{ selectedChallenge.content }}
         </div>
         <div class="date">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="buttons">
                   <div
-                    class="select-btn"
+                    class="select-btn color-blue"
                     @click="handleClickSelectedChallenge(challenge)"
                   >
                     선택하기
@@ -69,7 +69,7 @@
                   </div>
                 </div>
               </div>
-              <div class="content">
+              <div class="content color-content">
                 {{ challenge.content }}
               </div>
               <div class="dueDate">
@@ -81,7 +81,10 @@
         </div>
       </div>
       <!-- Make Challenge Button -->
-      <div class="challenge-make-btn" @click="handleClickMakeChallenge()">
+      <div
+        class="challenge-make-btn color-text"
+        @click="handleClickMakeChallenge()"
+      >
         챌린지 만들러 가기
       </div>
     </div>
@@ -160,7 +163,6 @@
       }
       .title {
         font-size: 10px;
-        color: #958565;
       }
     }
   }
@@ -200,7 +202,6 @@
       }
       .content {
         font-size: 14px;
-        color: #78540a;
       }
       .date {
         font-size: 12px;
@@ -326,7 +327,6 @@
                   width: fit-content;
                   height: 16px;
                   font-size: 14px;
-                  color: rgb(117, 117, 241);
                 }
                 .delete-btn {
                   width: fit-content;
@@ -339,7 +339,6 @@
               display: -webkit-box;
               padding-top: 5px;
               font-size: 10px;
-              color: #78540a;
               max-width: 235px;
               -webkit-line-clamp: 2;
               line-clamp: 2;
@@ -369,7 +368,6 @@
       justify-content: center;
       align-items: center;
       font-size: 24px;
-      color: #988461;
     }
   }
 </style>

@@ -30,12 +30,12 @@
       <!-- Select Date -->
       <div class="select-date-container">
         <div class="header main-color">Due to</div>
-        <div class="start-date">
+        <div class="start-date color-coral">
           <div class="text">Start from..</div>
           <div class="start-select-box main-color">
             <div>
               <select
-                class="select-date start"
+                class="select-date start main-color"
                 v-model="startDate"
                 @change="onStartDateChange($event)"
               >
@@ -50,11 +50,11 @@
             </div>
           </div>
         </div>
-        <div class="end-date">
+        <div class="end-date color-coral">
           <div class="text">End to..</div>
           <div class="end-select-box main-color">
             <div>
-              <select class="select-date end" v-model="endDate">
+              <select class="select-date end main-color" v-model="endDate">
                 <option
                   v-for="date in endDateOptions"
                   :key="date"
@@ -68,7 +68,9 @@
         </div>
       </div>
       <!-- Save Button -->
-      <div class="save-btn" @click="handleClickSaveChallenge()">저장하기!</div>
+      <div class="save-btn color-text" @click="handleClickSaveChallenge()">
+        저장하기!
+      </div>
     </div>
     <!-- Bottom Nav -->
   </div>
@@ -282,7 +284,6 @@
         .text {
           font-size: 20px;
           margin: 27px 0px 21px 13px;
-          color: #ff8e8c;
         }
         .start-select-box {
           font-size: 24px;
@@ -293,7 +294,6 @@
         .text {
           font-size: 20px;
           margin: 30px 0px 21px 13px;
-          color: #ff8e8c;
         }
         .end-select-box {
           font-size: 24px;
@@ -304,7 +304,6 @@
         border: none;
         background-color: #f8f6e9;
         outline: none;
-        color: #958565;
         font-size: 24px;
         font-family: "custom-font";
       }
@@ -319,7 +318,6 @@
       align-items: center;
       margin-bottom: 19px;
       font-size: 24px;
-      color: #988461;
     }
   }
 </style>

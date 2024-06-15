@@ -55,13 +55,28 @@
   .main-color {
     color: #958565;
   }
+  .main-color-border {
+    border-top: 1px solid #958565;
+  }
   .sub-color {
     color: #787265;
   }
   .color-red {
     color: #dd6262;
   }
-  .color-bottom-text {
+  .color-blue {
+    color: #737fe9;
+  }
+  .color-coral {
+    color: #ff8e8c;
+  }
+  .color-white {
+    color: #ffffff;
+  }
+  .color-text {
     color: #988461;
+  }
+  .color-content {
+    color: #78540a;
   }
 </style>
