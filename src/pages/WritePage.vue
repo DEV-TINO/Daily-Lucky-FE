@@ -84,7 +84,9 @@
             Upload Image
           </div>
         </div>
-        <div class="upload-button" @click="handleClickWriteDiary()">글쓰기</div>
+        <div class="upload-button color-text" @click="handleClickWriteDiary()">
+          글쓰기
+        </div>
       </div>
     </div>
     <div class="bottom-box"></div>
@@ -363,7 +365,6 @@
         height: 41px;
         margin-top: 18px;
         margin-bottom: 18px;
-        color: #988461;
         background-color: #f9e9c5;
         border-radius: 5px;
         font-size: 24px;
