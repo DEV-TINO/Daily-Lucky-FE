@@ -1,5 +1,6 @@
 <template>
   <div class="screen background-color">
+    <TopLogo v-if="showTopLogo"></TopLogo>
     <router-view></router-view>
     <div class="bottom background-color" v-if="isChallengePage()"></div>
     <BottomNav v-if="showBottomNav"></BottomNav>
@@ -8,11 +9,16 @@
 
 <script>
   import BottomNav from "@/components/BottomNav.vue";
+  import TopLogo from "@/components/TopLogo.vue";
   export default {
     components: {
       BottomNav,
+      TopLogo,
     },
     computed: {
+      showTopLogo() {
+        return this.$route.name !== "Splash";
+      },
       showBottomNav() {
         return this.$route.name !== "Splash";
       },
@@ -46,8 +52,8 @@
   }
   .bottom {
     width: 100%;
-    min-height: 81px;
-    height: 81px;
+    min-height: 70px;
+    height: 70px;
   }
   .is-hidden {
     visibility: hidden;

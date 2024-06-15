@@ -1,12 +1,6 @@
 <template>
   <div class="challenge-container">
-    <!-- top Nav -->
-    <div class="top">
-      <div class="logo">
-        <img class="emoji" src="/images/lucky-lucky.png" />
-        <div class="title main-color">Daily Lucky</div>
-      </div>
-    </div>
+    <!-- top Logo -->
 
     <!-- Selected Challenge -->
     <div class="challenge">
@@ -128,38 +122,12 @@
 
 <style scoped>
   .challenge-container {
-    min-height: 100%;
-    height: auto;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /* min-height: 100%; */
+    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
   }
-  .top {
-    width: 100%;
-    height: 59px;
-    display: flex;
-    padding-top: 45px;
-    gap: 95px;
-    justify-content: center;
-    align-items: center;
-    .logo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      .emoji {
-        width: 35px;
-        height: 31px;
-        margin-bottom: 5px;
-      }
-      .title {
-        font-size: 10px;
-      }
-    }
-  }
-
   .challenge {
     width: 393px;
     max-width: 393px;

@@ -3,7 +3,7 @@
   <div class="write-container">
     <!-- Contents -->
     <div>
-      <!-- Top Nav -->
+      <!-- Top Logo -->
       <div class="top">
         <div
           class="delete is-red"
@@ -11,10 +11,6 @@
           @click="handleClickDeletePost()"
         >
           삭제하기
-        </div>
-        <div class="logo">
-          <img class="emoji" src="/images/lucky-lucky.png" />
-          <div class="title main-color">Daily Lucky</div>
         </div>
       </div>
       <!-- Select Emoji -->
@@ -189,23 +185,6 @@
       height: 35px;
       width: 80px;
     }
-    .logo {
-      margin-top: 51px;
-      height: 68px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .emoji {
-        width: 35px;
-        height: 31px;
-        margin-bottom: 5px;
-      }
-      .title {
-        font-size: 10px;
-      }
-    }
-
     .today-moods {
       width: 100%;
       .title {

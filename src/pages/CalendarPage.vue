@@ -1,13 +1,8 @@
 <template>
   <div class="calendar-container">
+    <!-- Top Logo -->
     <!-- contents -->
     <div class="calendar-content">
-      <!-- Top Nav -->
-      <div class="logo">
-        <img class="image" src="/images/lucky-lucky.png" />
-        <div class="title main-color">Daily Lucky</div>
-      </div>
-
       <!-- Calendar Top -->
       <div class="calendar-month main-color">
         <div class="before" @click="handleClickChangeMonth(-1)">
@@ -313,22 +308,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .logo {
-    margin-top: 51px;
-    height: 68px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .image {
-      width: 35px;
-      height: 31px;
-      margin-bottom: 5px;
-    }
-    .title {
-      font-size: 10px;
-    }
   }
   .calendar-month {
     width: 100%;
