@@ -92,37 +92,28 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
     name: "CalendarPage",
+    computed: {
+      ...mapState([
+        "bottomMenu",
+        "days",
+        "months",
+        "selectedChallenge",
+        "calendarSelected",
+      ]),
+    },
     data() {
       return {
-        indicators: { left: "<", right: ">" },
-        bottomMenu: ["write", "calendar", "challenge"],
-        days: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
-        months: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ],
-
         // Today date : Default
-        currentYear: "2001",
-        currentMonth: "12",
-        currentDate: "14",
+        currentYear: this.$store.state.calendarSelected.year,
+        currentMonth: this.$store.state.calendarSelected.month,
+        currentDate: this.$store.state.calendarSelected.date,
 
         // totalWeeks in Month
         totalWeeks: [],
-
-        selectedChallenge: this.$store.state.selectedChallenge,
+        indicators: { left: "<", right: ">" },
       };
     },
 

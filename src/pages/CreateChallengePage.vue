@@ -77,8 +77,12 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
     name: "CreateChallengePage",
+    computed: {
+      ...mapState(["months", "days"]),
+    },
     data() {
       return {
         challengeTitle: "",
@@ -87,21 +91,6 @@
         endDate: "",
         startDateOptions: [],
         endDateOptions: [],
-        days: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
-        months: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ],
       };
     },
     created() {

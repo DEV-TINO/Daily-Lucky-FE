@@ -33,7 +33,7 @@
             @click="emojiType = emoji"
           >
             <img :class="emoji" :src="`/images/lucky-${emoji}.png`" />
-            <div class="text">
+            <div class="text is-red">
               {{ emoji }}
             </div>
           </div>
@@ -44,12 +44,12 @@
       <div class="writing-container">
         <div class="date">
           <div class="month-year main-color">
-            {{ MONTHS[this.$store.state.calendarSelected.month - 1] }}
+            {{ months[this.$store.state.calendarSelected.month - 1] }}
             {{ this.$store.state.calendarSelected.year }}
           </div>
           <div class="date-day main-color">
             {{ this.$store.state.calendarSelected.date }}
-            {{ DAYS[this.$store.state.calendarSelected.day] }}
+            {{ daysFullNames[this.$store.state.calendarSelected.day] }}
           </div>
         </div>
         <textarea
@@ -96,37 +96,16 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
     name: "WritePage",
+    computed: {
+      ...mapState(["months", "daysFullNames", "bottomMenu", "emojis"]),
+    },
     data() {
       return {
-        MONTHS: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ],
-        DAYS: {
-          SUN: "Sunday",
-          MON: "Monday",
-          TUE: "Tuesday",
-          WED: "Wednesday",
-          THU: "Thursday",
-          FRI: "Friday",
-          SAT: "Saturday",
-        },
         isHidden: false,
-        emojis: ["lucky", "happy", "sad", "angry"],
         emojiType: "lucky", // == emojiType
-        bottomMenu: ["write", "calendar", "challenge"],
         imageUrl: "",
         content: "",
         post: {},

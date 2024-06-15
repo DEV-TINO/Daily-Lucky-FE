@@ -94,10 +94,12 @@
 </template>
 
 <script>
-  import { mapGetters } from "vuex";
   import { mapState } from "vuex";
   export default {
     name: "ChallengePage",
+    computed: {
+      ...mapState(["selectedChallenge", "challenges"]),
+    },
     methods: {
       handleClickMakeChallenge() {
         this.$router.push("/create-challenge");
@@ -120,9 +122,6 @@
       applyChallengeStyle(index) {
         return index % 2 ? "even-challenge" : "odd-challenge";
       },
-    },
-    computed: {
-      ...mapState(["selectedChallenge", "challenges"]),
     },
   };
 </script>
