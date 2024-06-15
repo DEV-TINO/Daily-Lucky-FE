@@ -46,7 +46,7 @@
             class="list"
             v-for="(challenge, index) in challenges"
             :key="index"
-            :class="index % 2 ? 'even-challenge' : 'odd-challenge'"
+            :class="applyChallengeStyle(index)"
           >
             <img class="emoji" src="/images/lucky-lucky.png" />
             <div class="contents">
@@ -114,6 +114,9 @@
       selectChallenge(challenge) {
         this.$store.commit("selectChallenge", challenge);
         this.selectedChallenge = challenge;
+      },
+      applyChallengeStyle(index) {
+        return index % 2 ? "even-challenge" : "odd-challenge";
       },
     },
     computed: {
