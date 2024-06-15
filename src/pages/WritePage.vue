@@ -87,7 +87,7 @@
         <div class="upload-button" @click="handleClickWriteDiary()">글쓰기</div>
       </div>
     </div>
-    <div style="width: 100%; min-height: 81px; height: 81px"></div>
+    <div class="bottom-box"></div>
 
     <!-- Bottom Nav -->
   </div>
@@ -371,6 +371,11 @@
         justify-content: center;
         align-items: center;
       }
+    }
+    .bottom-box {
+      width: 100%;
+      min-height: 81px;
+      height: 81px;
     }
   }
 </style>
