@@ -22,7 +22,7 @@
           {{ selectedChallenge.startDate }} - {{ selectedChallenge.dueDate }}
         </div>
       </div>
-      <div class="no-selected-challenge" v-else>
+      <div class="no-selected-challenge" v-if="!selectedChallenge">
         <img class="image" src="/images/lucky-sad.png" />
         <div class="text main-color">아직 아무 챌린지도 없어요...</div>
       </div>
@@ -40,7 +40,7 @@
       </div>
 
       <!-- if Challenge exists in the Challenge List -->
-      <div class="exist" v-else>
+      <div class="exist" v-if="challenges.length !== 0">
         <div class="box">
           <div
             class="list"
