@@ -128,13 +128,6 @@
             date.setDate(baseDate.getDate() + i);
             dateOptions.push(this.formatDate(date));
           });
-
-        // for (let i = 0; i < daysToAdd; i++) {
-        //   const date = new Date(baseDate);
-        //   date.setDate(baseDate.getDate() + i);
-        //   const formattedDate = this.formatDate(date);
-        //   dateOptions.push(formattedDate);
-        // }
         return dateOptions;
       },
 
