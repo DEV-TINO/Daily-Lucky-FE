@@ -55,12 +55,15 @@
                   {{ challenge.title }}
                 </div>
                 <div class="buttons">
-                  <div class="select-btn" @click="selectChallenge(challenge)">
+                  <div
+                    class="select-btn"
+                    @click="handleClickSelectedChallenge(challenge)"
+                  >
                     선택하기
                   </div>
                   <div
                     class="delete-btn color-red"
-                    @click="deleteChallenge(index)"
+                    @click="handleClickDeleteChallenge(index)"
                   >
                     삭제하기
                   </div>
@@ -78,7 +81,7 @@
         </div>
       </div>
       <!-- Make Challenge Button -->
-      <div class="challenge-make-btn" @click="handleClickMakeChallenge">
+      <div class="challenge-make-btn" @click="handleClickMakeChallenge()">
         챌린지 만들러 가기
       </div>
     </div>
@@ -100,7 +103,7 @@
       handleClickMakeChallenge() {
         this.$router.push("/create-challenge");
       },
-      deleteChallenge(index) {
+      handleClickDeleteChallenge(index) {
         const challengeToDelete = this.challenges[index];
         this.$store.commit("deleteChallenge", index);
         if (
@@ -111,7 +114,7 @@
           this.selectedChallenge = null;
         }
       },
-      selectChallenge(challenge) {
+      handleClickSelectedChallenge(challenge) {
         this.$store.commit("selectChallenge", challenge);
         this.selectedChallenge = challenge;
       },

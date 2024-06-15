@@ -68,7 +68,7 @@
         </div>
       </div>
       <!-- Save Button -->
-      <div class="save-btn" @click="saveChallenge()">저장하기!</div>
+      <div class="save-btn" @click="handleClickSaveChallenge()">저장하기!</div>
     </div>
     <!-- Bottom Nav -->
   </div>
@@ -150,7 +150,7 @@
         return new Date(year, monthIndex, dateIndex);
       },
 
-      saveChallenge() {
+      handleClickSaveChallenge() {
         const newChallenge = {
           title: this.challengeTitle,
           content: this.challengeContents,

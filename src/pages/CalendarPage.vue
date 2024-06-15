@@ -10,14 +10,14 @@
 
       <!-- Calendar Top -->
       <div class="calendar-month">
-        <div class="before" @click="changeMonth(-1)">
+        <div class="before" @click="handleClickChangeMonth(-1)">
           {{ indicators.left }}
         </div>
         <div class="current">
           <div class="month">{{ getCurrentMonth(currentMonth) }}</div>
           <div class="year">{{ currentYear }}</div>
         </div>
-        <div class="after" @click="changeMonth(1)">
+        <div class="after" @click="handleClickChangeMonth(1)">
           {{ indicators.right }}
         </div>
       </div>
@@ -212,7 +212,7 @@
         this.currentDate = new Date().getDate();
       },
 
-      changeMonth(change) {
+      handleClickChangeMonth(change) {
         this.currentMonth += change;
         if (this.currentMonth < 1) {
           this.currentMonth = 12;

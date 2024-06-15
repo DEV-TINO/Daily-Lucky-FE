@@ -8,7 +8,7 @@
         <div
           class="delete is-red"
           :class="isHidden ? 'is-hidden' : ''"
-          @click="handleClickDeletePost"
+          @click="handleClickDeletePost()"
         >
           삭제하기
         </div>
