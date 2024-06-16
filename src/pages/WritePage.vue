@@ -1,6 +1,6 @@
 <!-- 사진 업로드 후 사진 저장되는 기능 -->
 <template>
-  <div class="write-container">
+  <div class="write-container background-color">
     <!-- Contents -->
     <div>
       <!-- Top Logo -->
@@ -37,7 +37,7 @@
       </div>
 
       <!-- Write Contents -->
-      <div class="writing-container">
+      <div class="writing-container background-color">
         <div class="date">
           <div class="month-year main-color">
             {{ months[this.$store.state.calendarSelected.month - 1] }}
@@ -170,6 +170,8 @@
 <style scoped>
   .write-container {
     height: 100vh;
+    /* min-height: 100vh; */
+    /* height: auto; */
     width: 100%;
     display: flex;
     flex-direction: column;

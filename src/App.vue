@@ -36,6 +36,9 @@
     font-family: "custom-font";
     src: url("@/assets/fonts/custom-font.ttf");
   }
+  html {
+    background-color: #f8f6e9;
+  }
   body {
     margin: 0;
     padding: 0;
