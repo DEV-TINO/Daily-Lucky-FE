@@ -1,5 +1,5 @@
 <template>
-  <div class="splash-container" @click="handleClickPlashContainer()">
+  <div class="splash-container" @click="handleClickSplashContainer()">
     <div class="main-color title">Daily Lucky</div>
     <img class="image" src="/images/lucky-lucky.png" />
     <div class="sub-color subtitle">Touch to Start</div>
@@ -10,7 +10,7 @@
   export default {
     name: "SplashPage",
     methods: {
-      handleClickPlashContainer() {
+      handleClickSplashContainer() {
         this.$router.push("/calendar");
       },
     },
