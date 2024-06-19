@@ -43,6 +43,8 @@ const store = createStore({
         "November",
         "December",
       ],
+      totalWeeks: [],
+      indicators: { left: "<", right: ">" },
     };
   },
   mutations: {
@@ -84,6 +86,9 @@ const store = createStore({
     },
     selectChallenge(state, challenge) {
       state.selectedChallenge = challenge;
+    },
+    setTotalWeeks(state, weeks) {
+      state.totalWeeks = weeks;
     },
   },
   actions: {
