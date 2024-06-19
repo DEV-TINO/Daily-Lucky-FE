@@ -1,22 +1,14 @@
 <template>
   <div class="calendar-container">
     <!-- Top Logo -->
+
     <!-- contents -->
     <div class="calendar-content">
       <!-- Calendar Top -->
-      <div class="calendar-month main-color">
-        <div class="before" @click="handleClickChangeMonth(-1)">
-          {{ indicators.left }}
-        </div>
-        <div class="current">
-          <div class="month">{{ getCurrentMonth(calendarSelected.month) }}</div>
-          <div class="year">{{ calendarSelected.year }}</div>
-        </div>
-        <div class="after" @click="handleClickChangeMonth(1)">
-          {{ indicators.right }}
-        </div>
-      </div>
-
+      <CalendarMonth
+        :handleClickChangeMonth="handleClickChangeMonth"
+        :getCurrentMonth="getCurrentMonth"
+      />
       <!-- Calendar date -->
       <CalendarDate
         :totalWeeks="totalWeeks"
@@ -45,7 +37,6 @@
         </div>
       </div>
     </div>
-    <!-- <div class="bottom-container"></div> -->
 
     <!-- Bottom Nav -->
   </div>
@@ -54,10 +45,12 @@
 <script>
   import { mapState } from "vuex";
   import CalendarDate from "@/components/CalendarDate.vue";
+  import CalendarMonth from "@/components/CalendarMonth.vue";
   export default {
     name: "CalendarPage",
     components: {
       CalendarDate,
+      CalendarMonth,
     },
     computed: {
       ...mapState([
@@ -273,41 +266,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .calendar-month {
-    width: 100%;
-    height: 72px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 32px;
-
-    .before,
-    .after {
-      padding-left: 20px;
-      padding-right: 20px;
-      width: 50px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .current {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .month {
-        font-size: 48px;
-        margin-bottom: 5px;
-      }
-
-      .year {
-        font-size: 10px;
-        margin-bottom: 10px;
-      }
-    }
   }
 
   .selected-challenge {
