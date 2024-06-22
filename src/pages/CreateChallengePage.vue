@@ -7,45 +7,12 @@
       <CreateChallenge v-model="challenge" />
 
       <!-- Select Date -->
-      <div class="select-date-container">
-        <div class="header main-color">Due to</div>
-        <div class="start-date color-coral">
-          <div class="text">Start from..</div>
-          <div class="start-select-box main-color">
-            <div>
-              <select
-                class="select-date start main-color"
-                v-model="startDate"
-                @change="onStartDateChange($event)"
-              >
-                <option
-                  v-for="date in startDateOptions"
-                  :key="date"
-                  :value="date"
-                >
-                  {{ date }}
-                </option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="end-date color-coral">
-          <div class="text">End to..</div>
-          <div class="end-select-box main-color">
-            <div>
-              <select class="select-date end main-color" v-model="endDate">
-                <option
-                  v-for="date in endDateOptions"
-                  :key="date"
-                  :value="date"
-                >
-                  {{ date }}
-                </option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
+      <SelectDate
+        v-model="chooseDate"
+        :startDateOptions="startDateOptions"
+        :endDateOptions="endDateOptions"
+        @startDateChange="onStartDateChange"
+      />
       <!-- Save Button -->
       <div class="save-btn color-text" @click="handleClickSaveChallenge()">
         저장하기!
@@ -57,11 +24,13 @@
 
 <script>
   import CreateChallenge from "@/components/CreateChallenge.vue";
+  import SelectDate from "@/components/SelectDate.vue";
   import { mapState } from "vuex";
   export default {
     name: "CreateChallengePage",
     components: {
       CreateChallenge,
+      SelectDate,
     },
     computed: {
       ...mapState(["months", "days"]),
@@ -72,8 +41,10 @@
           title: "",
           contents: "",
         },
-        startDate: "",
-        endDate: "",
+        chooseDate: {
+          startDate: "",
+          endDate: "",
+        },
         startDateOptions: [],
         endDateOptions: [],
       };
@@ -85,9 +56,9 @@
       initDates() {
         const today = new Date();
         this.startDateOptions = this.generateFutureDateOptions(today, 30);
-        this.startDate = this.formatDate(today);
+        this.chooseDate.startDate = this.formatDate(today);
         this.setEndDateOptions(today);
-        this.endDate = this.endDateOptions[0];
+        this.chooseDate.endDate = this.endDateOptions[0];
       },
       formatDate(date) {
         return `${date.getFullYear()} ${
@@ -116,7 +87,7 @@
         const selectedDate = event.target.value;
         const startDate = this.parseDate(selectedDate);
         this.setEndDateOptions(startDate);
-        this.endDate = this.endDateOptions[0];
+        this.chooseDate.endDate = this.endDateOptions[0];
       },
 
       parseDate(dateStr) {
@@ -130,8 +101,8 @@
         const newChallenge = {
           title: this.challenge.title,
           content: this.challenge.contents,
-          startDate: this.startDate,
-          dueDate: this.endDate,
+          startDate: this.chooseDate.startDate,
+          dueDate: this.chooseDate.endDate,
         };
         this.$store.dispatch("createChallenge", newChallenge);
         this.$router.push("/challenge");
@@ -155,42 +126,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    .select-date-container {
-      width: 80%;
-      height: 293px;
-      display: flex;
-      flex-direction: column;
-      .header {
-        font-size: 24px;
-      }
-      .start-date {
-        .text {
-          font-size: 20px;
-          margin: 27px 0px 21px 13px;
-        }
-        .start-select-box {
-          font-size: 24px;
-          text-align: center;
-        }
-      }
-      .end-date {
-        .text {
-          font-size: 20px;
-          margin: 30px 0px 21px 13px;
-        }
-        .end-select-box {
-          font-size: 24px;
-          text-align: center;
-        }
-      }
-      .select-date {
-        border: none;
-        background-color: #f8f6e9;
-        outline: none;
-        font-size: 24px;
-        font-family: "custom-font";
-      }
-    }
     .save-btn {
       width: 331px;
       height: 41px;
