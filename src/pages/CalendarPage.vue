@@ -20,21 +20,9 @@
     </div>
 
     <!-- Selected Challenge -->
-    <div class="selected-challenge">
-      <div class="challenge-container sub-color">
-        <div v-if="selectedChallenge" class="exist">
-          <div class="title">{{ selectedChallenge.title }}</div>
-          <div class="content color-content">
-            {{ selectedChallenge.content }}
-          </div>
-          <div class="dueDate">
-            {{ selectedChallenge.startDate }} - {{ selectedChallenge.dueDate }}
-          </div>
-        </div>
-        <div class="no-exist" v-if="!selectedChallenge">
-          <img class="emoji" src="/images/lucky-sad.png" />
-          <div class="content main-color">아직 아무 챌린지도 없어요...</div>
-        </div>
+    <div class="challenge-container">
+      <div class="box">
+        <SelectedChallenge containerClass="calendar-page" />
       </div>
     </div>
 
@@ -46,11 +34,13 @@
   import { mapState } from "vuex";
   import CalendarDate from "@/components/CalendarDate.vue";
   import CalendarMonth from "@/components/CalendarMonth.vue";
+  import SelectedChallenge from "@/components/SelectedChallenge.vue";
   export default {
     name: "CalendarPage",
     components: {
       CalendarDate,
       CalendarMonth,
+      SelectedChallenge,
     },
     computed: {
       ...mapState([
@@ -268,7 +258,7 @@
     align-items: center;
   }
 
-  .selected-challenge {
+  .challenge-container {
     width: 100%;
     height: 160px;
     display: flex;
@@ -277,57 +267,15 @@
     justify-content: flex-start;
     padding-bottom: 80px;
 
-    .challenge-container {
+    .box {
       width: 100%;
       height: 100%;
       background-color: rgba(249, 233, 197, 0.35);
-
-      .exist {
-        display: flex;
-        flex-direction: column;
+      .bottom-container {
         width: 100%;
-        height: 100%;
-        padding-top: 15px;
-        padding-left: 20px;
-        box-sizing: border-box;
-        .title {
-          font-size: 28px;
-        }
-        .content {
-          font-size: 14px;
-          padding-top: 10px;
-        }
-        .dueDate {
-          font-size: 12px;
-          align-self: flex-end;
-          margin-top: auto;
-          padding-right: 15px;
-          padding-bottom: 15px;
-        }
+        min-height: 81px;
+        height: 81px;
       }
-      .no-exist {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-      }
-
-      .emoji {
-        width: 87px;
-        height: 72px;
-        margin-right: 28px;
-      }
-
-      .content {
-        font-size: 24px;
-      }
-    }
-    .bottom-container {
-      width: 100%;
-      min-height: 81px;
-      height: 81px;
     }
   }
 </style>
