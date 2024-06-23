@@ -4,6 +4,7 @@ const store = createStore({
   state() {
     return {
       emojis: ["lucky", "happy", "sad", "angry"],
+      emojiType: "",
       calendarSelected: {
         year: 2001,
         month: 12,
