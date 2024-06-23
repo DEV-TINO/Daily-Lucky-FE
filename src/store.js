@@ -4,6 +4,7 @@ const store = createStore({
   state() {
     return {
       emojis: ["lucky", "happy", "sad", "angry"],
+      emojiType: "",
       calendarSelected: {
         year: 2001,
         month: 12,
@@ -43,6 +44,8 @@ const store = createStore({
         "November",
         "December",
       ],
+      totalWeeks: [],
+      indicators: { left: "<", right: ">" },
     };
   },
   mutations: {
@@ -84,6 +87,9 @@ const store = createStore({
     },
     selectChallenge(state, challenge) {
       state.selectedChallenge = challenge;
+    },
+    setTotalWeeks(state, weeks) {
+      state.totalWeeks = weeks;
     },
   },
   actions: {
