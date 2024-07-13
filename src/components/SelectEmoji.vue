@@ -6,14 +6,14 @@
     <div class="moods-emojis">
       <div
         class="emoji"
-        :class="emojiSelected(emoji)"
+        :class="emojiSelected(emoji.emojiType)"
         v-for="(emoji, index) in emojis"
         :key="index"
-        @click="$emit('updateEmojiType', emoji)"
+        @click="$emit('updateEmojiType', emoji.emojiType)"
       >
-        <img :class="emoji" :src="`/images/lucky-${emoji}.png`" />
+        <img :class="emoji.emojiType" :src="emoji.emojiUrl" />
         <div class="text is-red">
-          {{ emoji }}
+          {{ emoji.emojiType }}
         </div>
       </div>
     </div>
@@ -60,22 +60,22 @@
         align-items: center;
         justify-content: center;
 
-        .lucky {
+        .Lucky {
           margin-top: 30px;
           width: 59px;
           height: 55px;
         }
-        .happy {
+        .Happy {
           margin-top: 20px;
           width: 75px;
           height: 62px;
         }
-        .sad {
+        .Sad {
           margin-top: 22px;
           width: 68px;
           height: 56px;
         }
-        .angry {
+        .Angry {
           margin-top: 8px;
           width: 75px;
           height: 70px;
