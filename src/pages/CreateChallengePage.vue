@@ -25,7 +25,7 @@
 <script>
   import CreateChallenge from "@/components/CreateChallenge.vue";
   import SelectDate from "@/components/SelectDate.vue";
-  import { mapState } from "vuex";
+  import { mapState, mapActions } from "vuex";
   export default {
     name: "CreateChallengePage",
     components: {
@@ -53,6 +53,7 @@
       this.initDates();
     },
     methods: {
+      ...mapActions(["createChallenge"]),
       initDates() {
         const today = new Date();
         this.startDateOptions = this.generateFutureDateOptions(today, 30);
@@ -97,14 +98,14 @@
         return new Date(year, monthIndex, dateIndex);
       },
 
-      handleClickSaveChallenge() {
+      async handleClickSaveChallenge() {
         const newChallenge = {
           title: this.challenge.title,
           content: this.challenge.contents,
           startDate: this.chooseDate.startDate,
           dueDate: this.chooseDate.endDate,
         };
-        this.$store.dispatch("createChallenge", newChallenge);
+        await this.createChallenge(newChallenge);
         this.$router.push("/challenge");
       },
     },

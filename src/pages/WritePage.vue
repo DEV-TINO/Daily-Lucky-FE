@@ -36,7 +36,7 @@
 <script>
   import SelectEmoji from "@/components/SelectEmoji.vue";
   import WriteContent from "@/components/WriteContent.vue";
-  import { mapState } from "vuex";
+  import { mapState, mapActions } from "vuex";
   export default {
     name: "WritePage",
     components: {
@@ -49,7 +49,7 @@
     data() {
       return {
         isHidden: false,
-        emojiType: "lucky", // == emojiType
+        emojiType: "Lucky", // == emojiType
         imageUrl: "",
         content: "",
         post: {},
@@ -72,13 +72,14 @@
       }
     },
     methods: {
+      ...mapActions(["createPost"]),
       updateEmojiType(emoji) {
         this.emojiType = emoji;
       },
       updateContent(content) {
         this.content = content;
       },
-      handleClickWriteDiary() {
+      async handleClickWriteDiary() {
         const post = {
           ...this.$store.state.calendarSelected,
           emoji: this.emojiType,
@@ -86,7 +87,7 @@
           imageUrl: this.imageUrl,
         };
         if (!this.post) {
-          this.$store.commit("addPost", post);
+          await this.createPost(post);
         } else {
           this.$store.commit("updatePost", post);
         }

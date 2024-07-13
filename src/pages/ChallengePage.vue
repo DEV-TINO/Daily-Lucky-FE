@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import { mapState } from "vuex";
+  import { mapState, mapActions } from "vuex";
   import ChallengeList from "@/components/ChallengeList.vue";
   import SelectedChallenge from "@/components/SelectedChallenge.vue";
   export default {
@@ -36,24 +36,33 @@
       ...mapState(["selectedChallenge", "challenges"]),
     },
     methods: {
+      ...mapActions([
+        "fetchChallenges",
+        "createChallenge",
+        "selectChallenge",
+        "deleteChallenge",
+      ]),
       handleClickMakeChallenge() {
         this.$router.push("/create-challenge");
       },
-      handleClickDeleteChallenge(index) {
+      async handleClickDeleteChallenge(index) {
         const challengeToDelete = this.challenges[index];
-        this.$store.commit("deleteChallenge", index);
+        await this.deleteChallenge(challengeToDelete.challengeId);
         if (
           this.selectedChallenge &&
-          this.selectedChallenge === challengeToDelete
+          this.selectedChallenge.challengeId === challengeToDelete.challengeId
         ) {
           this.$store.commit("selectChallenge", null);
         }
       },
-      handleClickSelectedChallenge(challenge) {
-        this.$store.commit("selectChallenge", challenge);
+      async handleClickSelectedChallenge(challenge) {
+        await this.selectChallenge(challenge.challengeId);
       },
       applyChallengeStyle(index) {
         return index % 2 ? "even-challenge" : "odd-challenge";
+      },
+      async created() {
+        await this.$store.dispatch("fetchChallenges");
       },
     },
   };

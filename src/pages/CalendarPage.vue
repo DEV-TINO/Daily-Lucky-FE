@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import { mapState } from "vuex";
+  import { mapState, mapActions } from "vuex";
   import CalendarDate from "@/components/CalendarDate.vue";
   import CalendarMonth from "@/components/CalendarMonth.vue";
   import SelectedChallenge from "@/components/SelectedChallenge.vue";
@@ -54,6 +54,7 @@
       ]),
     },
     methods: {
+      ...mapActions(["fetchPosts"]),
       // Check if post exists
       checkPostExist(date, day) {
         const check = this.$store.state.posts.filter((post, index) => {
@@ -78,7 +79,7 @@
             post.day == day
           );
         })[0].emoji;
-        return `/images/lucky-${emoji}.png`;
+        return post ? post.emojiUrl : "";
       },
 
       getEmojiStyle(date, day) {
@@ -235,9 +236,12 @@
         return this.months[this.calendarSelected.month - 1];
       },
     },
-
-    mounted() {
+    async mounted() {
       this.initCalendar();
+      await this.fetchPosts({
+        year: this.calendarSelected.year,
+        month: this.calendarSelected.month,
+      });
     },
   };
 </script>
