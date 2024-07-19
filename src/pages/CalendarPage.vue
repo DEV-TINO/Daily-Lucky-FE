@@ -71,14 +71,14 @@
 
       // Get post emoji
       getPostEmoji(date, day) {
-        const emoji = this.$store.state.posts.filter((post, index) => {
+        const post = this.$store.state.posts.filter((post) => {
           return (
             post.year == this.calendarSelected.year &&
             post.month == this.calendarSelected.month &&
             post.date == date &&
             post.day == day
           );
-        })[0].emoji;
+        })[0];
         return post ? post.emojiUrl : "";
       },
 
