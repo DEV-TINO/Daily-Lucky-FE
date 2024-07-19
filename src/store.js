@@ -157,8 +157,13 @@ const store = createStore({
     },
     async createChallenge({ dispatch }, challenge) {
       try {
-        await axios.post(`${PORT}/challenges/create`, challenge);
-        dispatch("fetchChallenges");
+        const response = await axios.post(
+          `${PORT}/challenges/create`,
+          challenge
+        );
+        if (response.data.success) {
+          dispatch("fetchChallenges");
+        }
       } catch (error) {
         console.error("Error creating challenge:", error);
       }
